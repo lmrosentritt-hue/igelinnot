@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lehr- und Lernpfad Drautal · 12 Stationen · SOS Igel in Not</title>
+<meta name="description" content="12 Stationen rund um Igel, Totholz, Wildhecken & Co. – der Lehr- und Lernpfad in Feistritz an der Drau. Alle Tafel-Inhalte digital nachlesen.">
+<link rel="stylesheet" href="styles/main.css">
+<style>
+:root {
+  --forest: #2D4A2B;
+  --forest-deep: #1F3520;
+  --autumn: #B8451F;
+  --autumn-deep: #8B2E10;
+}
+
+/* ============ HERO ============ */
+.lp-hero {
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(45, 74, 43, 0.1), transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(184, 69, 31, 0.08), transparent 50%),
+    var(--cream);
+  padding: 64px 0 40px;
+  text-align: center;
+  position: relative;
+}
+.lp-hero .eyebrow {
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  color: var(--autumn);
+  display: block;
+  margin-bottom: 6px;
+}
+.lp-hero h1 {
+  color: var(--forest-deep);
+  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+  margin-bottom: 14px;
+}
+.lp-hero h1 em {
+  font-style: italic;
+  color: var(--autumn);
+}
+.lp-hero p.lead {
+  max-width: 720px;
+  margin: 0 auto 24px;
+  color: var(--text-mid);
+  font-size: 1.15rem;
+}
+.lp-stats {
+  display: inline-flex;
+  gap: 30px;
+  background: var(--paper);
+  padding: 16px 32px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.lp-stats .stat {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.lp-stats strong {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  color: var(--autumn);
+  font-weight: 800;
+}
+.lp-stats span { font-size: 0.92rem; color: var(--text-mid); font-weight: 600; }
+
+/* ============ TABS ============ */
+.tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 28px 0 0;
+  flex-wrap: wrap;
+}
+.tabs button {
+  background: var(--paper);
+  border: 2px solid transparent;
+  padding: 11px 22px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--bark);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.tabs button.active {
+  background: var(--forest);
+  color: white;
+  border-color: var(--forest);
+  box-shadow: 0 4px 14px rgba(45, 74, 43, 0.25);
+}
+.tabs button:hover:not(.active) {
+  border-color: var(--honey);
+  background: var(--paper-shadow);
+}
+
+/* ============ KATEGORIE-CHIPS ============ */
+.cat-bar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 30px 0 0;
+  flex-wrap: wrap;
+}
+.cat-chip {
+  background: var(--paper);
+  border: 1.5px solid rgba(61, 46, 31, 0.12);
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-mid);
+}
+.cat-chip.active, .cat-chip:hover {
+  background: var(--autumn);
+  border-color: var(--autumn);
+  color: white;
+}
+.cat-chip .ct { opacity: 0.7; margin-left: 4px; font-weight: 600; }
+
+/* ============ VIEW: STATIONS-GRID ============ */
+.view { display: none; }
+.view.active { display: block; }
+
+.lp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.lp-card {
+  background: var(--paper);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s;
+  border-top: 4px solid var(--forest);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.lp-card.cat-igel { border-top-color: var(--autumn); }
+.lp-card.cat-totholz { border-top-color: #8B6F2E; }
+.lp-card.cat-garten { border-top-color: var(--forest); }
+.lp-card.cat-wahl { border-top-color: var(--moss); }
+
+.lp-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+.lp-card .card-head {
+  position: relative;
+  height: 110px;
+  background: linear-gradient(135deg, var(--forest) 0%, #1A2A14 100%);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.lp-card .card-head::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 80% 30%, rgba(245, 193, 60, 0.18), transparent 50%);
+  pointer-events: none;
+}
+.lp-card .cat-icon {
+  font-size: 3.6rem;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+  position: relative;
+  z-index: 1;
+}
+.lp-card.cat-igel .card-head { background: linear-gradient(135deg, var(--autumn) 0%, #6E2810 100%); }
+.lp-card.cat-totholz .card-head { background: linear-gradient(135deg, #8B6F2E 0%, #4F3D14 100%); }
+.lp-card.cat-garten .card-head { background: linear-gradient(135deg, var(--forest) 0%, #1A2A14 100%); }
+.lp-card.cat-wahl .card-head { background: linear-gradient(135deg, var(--moss) 0%, #354418 100%); }
+.lp-card .num {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 44px;
+  height: 44px;
+  background: var(--autumn);
+  color: white;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  border: 3px solid white;
+}
+.lp-card .cat-tag {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(255, 251, 243, 0.95);
+  backdrop-filter: blur(4px);
+  color: var(--bark);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 5px 11px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.lp-card .body {
+  padding: 20px 22px 22px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.lp-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+  color: var(--forest-deep);
+}
+.lp-card .tagline {
+  font-size: 0.92rem;
+  color: var(--text-mid);
+  margin: 0 0 14px;
+  font-style: italic;
+}
+.lp-card ul {
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+  flex: 1;
+}
+.lp-card ul li {
+  padding: 5px 0 5px 22px;
+  position: relative;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.lp-card ul li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--autumn);
+  font-weight: 700;
+}
+.lp-card .detail-btn {
+  background: var(--forest);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  transition: all 0.2s;
+}
+.lp-card .detail-btn:hover {
+  background: var(--forest-deep);
+  color: white;
+  text-decoration: none;
+}
+@media (max-width: 900px) { .lp-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .lp-grid { grid-template-columns: 1fr; } }
+
+/* ============ DETAIL-SEKTIONEN ============ */
+.lp-detail {
+  scroll-margin-top: 100px;
+  background: var(--paper);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+.lp-detail::before {
+  content: attr(data-num);
+  position: absolute;
+  top: -20px;
+  right: 28px;
+  font-family: 'Fraunces', serif;
+  font-weight: 800;
+  font-size: 12rem;
+  color: var(--autumn);
+  opacity: 0.06;
+  line-height: 1;
+  pointer-events: none;
+}
+.lp-detail-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.lp-detail .num-big {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--autumn);
+  color: white;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+}
+.lp-detail h2 {
+  color: var(--forest-deep);
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  margin: 0 0 10px;
+}
+.lp-detail .tagline {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--autumn);
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+.lp-detail p { color: var(--bark); line-height: 1.65; }
+.lp-detail h4 {
+  color: var(--forest);
+  margin: 20px 0 10px;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lp-detail h4::before {
+  content: '';
+  width: 18px;
+  height: 3px;
+  background: var(--autumn);
+  border-radius: 3px;
+}
+.lp-detail ul.tipps {
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+.lp-detail ul.tipps li {
+  padding: 6px 0 6px 26px;
+  position: relative;
+  line-height: 1.5;
+}
+.lp-detail ul.tipps li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--forest);
+  font-weight: 800;
+  background: #DCE8C8;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  top: 7px;
+}
+.lp-detail .bewohner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.lp-detail .bewohner span {
+  background: #F5E6C4;
+  color: var(--bark);
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.lp-detail .back-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 24px;
+  color: var(--text-mid);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.lp-detail .back-top:hover { color: var(--autumn); }
+
+@media (max-width: 820px) {
+  .lp-detail { padding: 32px 24px; }
+  .lp-detail::before { font-size: 7rem; right: 16px; }
+}
+
+/* ============ KARTE ============ */
+.map-view {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+@media (max-width: 900px) { .map-view { grid-template-columns: 1fr; } }
+.map-canvas {
+  background: linear-gradient(135deg, #E8EBD4 0%, #D4DDB8 60%, #BCC99D 100%);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  min-height: 620px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.map-path {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.map-pin {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 50% 50% 50% 0;
+  background: var(--autumn);
+  transform: rotate(-45deg);
+  display: grid;
+  place-items: center;
+  color: white;
+  font-weight: 800;
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  border: 2.5px solid white;
+  transition: all 0.2s;
+}
+.map-pin span { transform: rotate(45deg); }
+.map-pin:hover { transform: rotate(-45deg) scale(1.18); z-index: 10; }
+.map-pin.active {
+  background: var(--honey);
+  color: var(--bark);
+  transform: rotate(-45deg) scale(1.2);
+  z-index: 10;
+}
+.map-detail-card {
+  background: var(--paper);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 90px;
+}
+.map-detail-card .img-thumb {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin: 16px 0;
+  aspect-ratio: 16/10;
+}
+.map-detail-card .img-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.map-detail-card .station-num {
+  display: inline-flex;
+  background: var(--autumn);
+  color: white;
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+.map-legend {
+  background: var(--paper);
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ============ CTA Block ============ */
+.lp-cta {
+  margin-top: 50px;
+  background: linear-gradient(135deg, var(--forest) 0%, var(--forest-deep) 100%);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  color: white;
+  text-align: center;
+}
+.lp-cta h2 { color: white; }
+.lp-cta p { max-width: 560px; margin: 0 auto 24px; opacity: 0.92; }
+</style>
+</head>
+<body data-page="lehrpfad">
+
+<main>
+  <!-- HERO -->
+  <section class="lp-hero">
+    <div class="container">
+      <span class="eyebrow">Kapitel 2 · Erleben</span>
+      <h1>Der <em>Lehr- &amp; Lernpfad</em> Drautal</h1>
+      <p class="lead">
+        12 Stationen rund um den Igel und seinen Lebensraum. Jede Tafel zeigt, wie ein einzelnes Naturmodul – Totholz, Reisig, Steinpyramide – den Garten zur Rettungsinsel macht. Hier digital nachlesen, vor Ort erleben.
+      </p>
+      <div class="lp-stats">
+        <span class="stat"><strong>12</strong><span>Stationen</span></span>
+        <span class="stat"><strong>4</strong><span>Themenbereiche</span></span>
+        <span class="stat"><strong>1.300+</strong><span>Käferarten profitieren</span></span>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="active" onclick="showView('grid', this)" type="button">📋 Stationen-Übersicht</button>
+        <button onclick="showView('map', this)" type="button">🗺️ Karte</button>
+        <button onclick="showView('details', this)" type="button">📖 Detail-Tafeln</button>
+      </div>
+
+      <div class="cat-bar" id="cat-bar">
+        <button class="cat-chip active" data-cat="all">Alle <span class="ct">13</span></button>
+        <button class="cat-chip" data-cat="igel">🦔 Igel <span class="ct">2</span></button>
+        <button class="cat-chip" data-cat="totholz">🪵 Totholz &amp; Käfer <span class="ct">5</span></button>
+        <button class="cat-chip" data-cat="garten">🌿 Gartenstrukturen <span class="ct">4</span></button>
+        <button class="cat-chip" data-cat="wahl">🤝 Bewusste Wahl <span class="ct">2</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATIONS-GRID -->
+  <section style="padding-top: 30px;">
+    <div class="container">
+
+      <!-- ===== VIEW: GRID ===== -->
+      <div class="view active" id="view-grid">
+        <div class="lp-grid" id="grid-container">
+          <!-- per JS gefüllt -->
+        </div>
+      </div>
+
+      <!-- ===== VIEW: MAP ===== -->
+      <div class="view" id="view-map">
+        <div class="map-view">
+          <div>
+            <div class="map-canvas">
+              <svg class="map-path" viewBox="0 0 600 620" preserveAspectRatio="none">
+                <path d="M 60 60 Q 200 80 280 160 Q 360 250 200 290 Q 80 320 180 400 Q 280 470 420 430 Q 540 400 480 320 Q 420 240 500 180 Q 560 120 480 80" stroke="#6B4423" stroke-width="3" stroke-dasharray="6 8" fill="none" stroke-linecap="round" opacity="0.55"/>
+                <g opacity="0.55">
+                  <circle cx="430" cy="100" r="22" fill="#7A9A4F"/>
+                  <circle cx="540" cy="240" r="16" fill="#6B8A3F"/>
+                  <circle cx="80" cy="520" r="20" fill="#7A9A4F"/>
+                  <circle cx="380" cy="560" r="18" fill="#6B8A3F"/>
+                  <circle cx="100" cy="250" r="14" fill="#6B8A3F"/>
+                </g>
+              </svg>
+              <div class="map-pin active" style="top:7%; left:10%;" onclick="selectMapStation(1, this)"><span>1</span></div>
+              <div class="map-pin" style="top:13%; left:42%;" onclick="selectMapStation(2, this)"><span>2</span></div>
+              <div class="map-pin" style="top:26%; left:58%;" onclick="selectMapStation(3, this)"><span>3</span></div>
+              <div class="map-pin" style="top:37%; left:38%;" onclick="selectMapStation(4, this)"><span>4</span></div>
+              <div class="map-pin" style="top:46%; left:18%;" onclick="selectMapStation(5, this)"><span>5</span></div>
+              <div class="map-pin" style="top:55%; left:26%;" onclick="selectMapStation(6, this)"><span>6</span></div>
+              <div class="map-pin" style="top:63%; left:48%;" onclick="selectMapStation(7, this)"><span>7</span></div>
+              <div class="map-pin" style="top:68%; left:70%;" onclick="selectMapStation(8, this)"><span>8</span></div>
+              <div class="map-pin" style="top:55%; left:82%;" onclick="selectMapStation(9, this)"><span>9</span></div>
+              <div class="map-pin" style="top:40%; left:82%;" onclick="selectMapStation(10, this)"><span>10</span></div>
+              <div class="map-pin" style="top:28%; left:80%;" onclick="selectMapStation(11, this)"><span>11</span></div>
+              <div class="map-pin" style="top:15%; left:72%;" onclick="selectMapStation(12, this)"><span>12</span></div>
+              <div class="map-pin" style="top:5%; left:80%;" onclick="selectMapStation(13, this)"><span>13</span></div>
+            </div>
+            <div class="map-legend">
+              <span style="font-size:1.2rem;">💡</span>
+              <span>Klick auf eine Station, um Details rechts anzuzeigen. Anordnung schematisch – tatsächliche Reihenfolge wird vor Ort markiert.</span>
+            </div>
+          </div>
+
+          <div class="map-detail-card" id="map-detail">
+            <!-- per JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== VIEW: DETAILS ===== -->
+      <div class="view" id="view-details">
+        <div id="details-container">
+          <!-- per JS gefüllt -->
+        </div>
+
+        <div class="lp-cta">
+          <h2>Den Pfad live erleben</h2>
+          <p>Du möchtest den Lehrpfad vor Ort besuchen, mit Führung oder als Schulklasse? Schreib uns oder ruf an – Ursula nimmt sich gerne Zeit.</p>
+          <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+            <a class='btn' href='/notfall' style='background: var(--honey); color: var(--bark); font-weight:800;'>Kontakt aufnehmen →</a>
+            <a href="https://www.facebook.com/profile.php?id=61570800514610" target="_blank" rel="noopener" class="btn btn-secondary" style="background: white;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9.197 21v-9h-3v-3h3V6.5C9.197 4.567 10.764 3 12.697 3h3v3h-2c-.552 0-1 .448-1 1v2h3l-.5 3h-2.5v9z"/></svg>
+              Auf Facebook folgen
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script src="assets/partials.js"></script>
+<script src="assets/stations-data.js"></script>
+<script>
+function showView(name, btn) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  // Cat-Bar nur in Grid-View sinnvoll
+  document.getElementById('cat-bar').style.display = (name === 'grid') ? 'flex' : 'none';
+  window.scrollTo({ top: document.querySelector('.tabs').offsetTop - 60, behavior: 'smooth' });
+}
+
+// === GRID rendern ===
+function renderGrid(filterCat = 'all') {
+  const c = document.getElementById('grid-container');
+  const catIcons = {
+    igel: '🦔',
+    totholz: '🪵',
+    garten: '🌿',
+    wahl: '🤝',
+  };
+  c.innerHTML = STATIONS.filter(s => filterCat === 'all' || s.cat === filterCat).map(s => `
+    <article class="lp-card cat-${s.cat}">
+      <div class="card-head">
+        <div class="num">${s.n}</div>
+        <div class="cat-tag">${s.catLabel}</div>
+        <div class="cat-icon">${catIcons[s.cat] || '🦔'}</div>
+      </div>
+      <div class="body">
+        <h3>${s.title}</h3>
+        <p class="tagline">${s.tagline}</p>
+        <ul>
+          ${s.highlights.map(h => `<li>${h}</li>`).join('')}
+        </ul>
+        <a class="detail-btn" href="#station-${s.slug}" onclick="jumpToDetail('${s.slug}', event)">
+          Mehr lesen
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </article>
+  `).join('');
+}
+
+// === KATEGORIE-FILTER ===
+document.getElementById('cat-bar').addEventListener('click', e => {
+  const btn = e.target.closest('.cat-chip');
+  if (!btn) return;
+  document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid(btn.dataset.cat);
+});
+
+// === DETAILS rendern ===
+function renderDetails() {
+  document.getElementById('details-container').innerHTML = STATIONS.map(s => `
+    <section class="lp-detail" id="station-${s.slug}" data-num="${s.n}">
+      <div class="lp-detail-inner">
+        <div class="num-big">Station ${s.n} · ${s.catLabel}</div>
+        <h2>${s.title}</h2>
+        <p class="tagline">${s.tagline}</p>
+        ${s.intro ? `<p>${s.intro}</p>` : ''}
+        ${s.howto ? `<h4>So baust du es</h4><p>${s.howto}</p>` : ''}
+        ${s.tipps && s.tipps.length ? `<h4>Wichtige Tipps</h4><ul class="tipps">${s.tipps.map(t => `<li>${t}</li>`).join('')}</ul>` : ''}
+        ${s.bewohner && s.bewohner.length ? `<h4>Wer hier wohnt</h4><div class="bewohner">${s.bewohner.map(b => `<span>${b}</span>`).join('')}</div>` : ''}
+        ${s.fazit ? `<h4>Warum es zählt</h4><p>${s.fazit}</p>` : ''}
+        <a class="back-top" href="#top" onclick="scrollTop(event)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg>
+          Nach oben
+        </a>
+      </div>
+    </section>
+  `).join('');
+}
+
+// === KARTE Detail ===
+function selectMapStation(n, el) {
+  const s = STATIONS[n-1];
+  document.querySelectorAll('.map-pin').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('map-detail').innerHTML = `
+    <span class="station-num">${s.n}</span>
+    <h2 style="margin: 12px 0 6px; color: var(--forest-deep);">${s.title}</h2>
+    <p style="color: var(--autumn); font-style: italic; font-weight: 600; margin: 0 0 14px;">${s.tagline}</p>
+    <p style="font-size: 0.95rem; margin-bottom: 16px;">${s.shortDesc}</p>
+    ${s.highlights && s.highlights.length ? `<ul style="font-size: 0.88rem; padding: 0; list-style: none; margin: 0 0 16px;">${s.highlights.slice(0,3).map(h => `<li style="padding: 4px 0 4px 18px; position: relative;"><span style="position: absolute; left: 0; color: var(--autumn);">▸</span>${h}</li>`).join('')}</ul>` : ''}
+    <a class="btn btn-primary" href="#station-${s.slug}" onclick="showView('details', document.querySelectorAll('.tabs button')[2]); setTimeout(() => jumpToDetail('${s.slug}'), 200); return false;" style="font-size: 0.88rem; padding: 10px 18px;">
+      Alle Details lesen →
+    </a>
+  `;
+}
+
+// === Sprung zu Detail-Sektion ===
+function jumpToDetail(slug, ev) {
+  if (ev) ev.preventDefault();
+  showView('details', document.querySelectorAll('.tabs button')[2]);
+  setTimeout(() => {
+    const target = document.getElementById('station-' + slug);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+function scrollTop(ev) {
+  if (ev) ev.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// === Init ===
+renderGrid();
+renderDetails();
+selectMapStation(1, document.querySelector('.map-pin.active'));
+
+// Direkt-Link Support: #station-... aus URL beim Laden
+window.addEventListener('DOMContentLoaded', () => {
+  if (location.hash && location.hash.startsWith('#station-')) {
+    const slug = location.hash.replace('#station-', '');
+    setTimeout(() => jumpToDetail(slug), 200);
+  }
+});
+</script>
+</body>
+</html>

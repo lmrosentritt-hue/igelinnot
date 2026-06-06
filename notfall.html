@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Igel-Notfall · SOS Igel in Not</title>
+<link rel="stylesheet" href="styles/main.css">
+<style>
+.giant-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--cream-warm);
+  color: var(--accent-red);
+  padding: 24px 40px;
+  border-radius: 999px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 2.4rem;
+  text-decoration: none;
+  border: 3px solid var(--ink);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+  transition: transform 0.2s;
+  margin: 12px 0;
+}
+.giant-phone:hover { transform: translateY(-3px) scale(1.02); text-decoration: none; color: var(--accent-red); }
+
+.warn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 900px) { .warn-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .warn-grid { grid-template-columns: 1fr; } }
+
+.warn-card {
+  background: var(--cream-warm);
+  border: 2px solid var(--accent-red);
+  border-radius: 18px;
+  padding: 24px 22px;
+  position: relative;
+  transition: all 0.2s;
+}
+.warn-card:hover { background: var(--accent-red); color: var(--cream-warm); transform: rotate(-1deg) translateY(-3px); }
+.warn-card:hover h3, .warn-card:hover p { color: var(--cream-warm); }
+.warn-card .icon-big {
+  font-size: 2.4rem;
+  display: block;
+  margin-bottom: 12px;
+}
+.warn-card h3 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--accent-red);
+  font-size: 1.2rem;
+  margin: 0 0 8px;
+}
+.warn-card p { color: var(--ink-soft); font-size: 0.95rem; margin: 0; }
+
+/* === Step-Boxes === */
+.steps-list {
+  display: grid;
+  gap: 20px;
+}
+.step-box {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 24px;
+  align-items: start;
+  background: var(--cream-warm);
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  padding: 24px 28px;
+  position: relative;
+}
+.step-box .step-num {
+  width: 70px;
+  height: 70px;
+  background: var(--sun);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 2.2rem;
+}
+.step-box.danger { border-color: var(--accent-red); background: rgba(193, 59, 42, 0.06); }
+.step-box.danger .step-num { background: var(--accent-red); color: var(--cream-warm); }
+.step-box h3 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.step-box p { margin: 0; color: var(--ink-soft); line-height: 1.55; }
+.step-box .step-list {
+  list-style: none;
+  padding: 8px 0 0;
+  margin: 0;
+}
+.step-box .step-list li {
+  padding: 6px 0 6px 28px;
+  position: relative;
+}
+.step-box .step-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent-red);
+  font-weight: 800;
+}
+@media (max-width: 700px) {
+  .step-box { grid-template-columns: 1fr; gap: 16px; }
+  .step-box .step-num { width: 56px; height: 56px; font-size: 1.6rem; }
+}
+
+/* === Don'ts Box === */
+.donts-box {
+  background: var(--accent-red);
+  color: var(--cream-warm);
+  border: 3px solid var(--ink);
+  border-radius: 20px;
+  padding: 32px 30px;
+}
+.donts-box h3 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--sun);
+  font-size: 1.8rem;
+  margin: 0 0 18px;
+}
+.donts-box ul { padding: 0; list-style: none; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+@media (max-width: 700px) { .donts-box ul { grid-template-columns: 1fr; } }
+.donts-box li {
+  padding: 8px 0 8px 32px;
+  position: relative;
+  border-bottom: 1px solid rgba(253, 246, 227, 0.15);
+}
+.donts-box li::before {
+  content: '✕';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 22px;
+  height: 22px;
+  background: var(--cream-warm);
+  color: var(--accent-red);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+/* === Kontakt-Form === */
+.contact-form-wrap {
+  background: var(--ink);
+  border-radius: 24px;
+  padding: 40px;
+  color: var(--cream-warm);
+}
+.contact-form-wrap h2 { color: var(--sun); margin: 0 0 10px; }
+.contact-form-wrap p { color: rgba(253,246,227,0.85); }
+.contact-form-wrap .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+@media (max-width: 700px) { .contact-form-wrap .form-row { grid-template-columns: 1fr; } }
+.contact-form-wrap input, .contact-form-wrap textarea {
+  width: 100%;
+  background: var(--cream-warm);
+  color: var(--ink);
+  border: 2px solid var(--sun);
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+.contact-form-wrap label { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--sun-soft); margin-bottom: 6px; display: block; }
+.contact-form-wrap textarea { min-height: 120px; resize: vertical; }
+.contact-form-wrap button {
+  background: var(--sun);
+  color: var(--ink);
+  border: 2px solid var(--sun);
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 12px;
+}
+.contact-form-wrap button:hover { background: var(--cream-warm); color: var(--ink); }
+</style>
+</head>
+<body data-page="notfall">
+
+<main>
+
+  <!-- ====== HERO (rot, dringlich) ====== -->
+  <section class="page-hero-bold bg-red">
+    <span class="float-emoji tl">🚨</span>
+    <span class="float-emoji br">🦔</span>
+    <div class="container">
+      <span class="eyebrow">⚠ Soforthilfe</span>
+      <h1>Igel gefunden? <em>Ruf jetzt an.</em></h1>
+      <p class="lead">
+        Bei Igel-Notfällen zählt jede Minute. Ursula ist erreichbar – auch am Wochenende.
+      </p>
+      <div style="margin-top: 28px;">
+        <a href="tel:+436502699710" class="giant-phone">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          0650 / 269 97 10
+        </a>
+      </div>
+      <p style="font-family:'Caveat',cursive; font-size:1.7rem; color: var(--sun-soft); margin-top: 16px;">„Lieber einmal zu viel anrufen." — Ursula</p>
+    </div>
+  </section>
+
+  <!-- ====== WARNSIGNALE ====== -->
+  <section class="bg-cream">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Wann braucht ein Igel Hilfe?</span>
+        <h2>Die <em>wichtigsten</em> Warnsignale</h2>
+        <p>Trifft einer dieser Punkte zu? Dann <span class="hl-red">bitte sofort anrufen</span>.</p>
+      </div>
+
+      <div class="warn-grid">
+        <div class="warn-card">
+          <span class="icon-big">☀️</span>
+          <h3>Tagsüber aktiv</h3>
+          <p>Ein gesunder Igel ist nur nachts unterwegs. Zeigt er sich tagsüber, stimmt meistens etwas nicht.</p>
+        </div>
+        <div class="warn-card">
+          <span class="icon-big">🤕</span>
+          <h3>Verletzung sichtbar</h3>
+          <p>Offene Wunden, Humpeln, Blut – auch kleine Verletzungen können sich schnell entzünden.</p>
+        </div>
+        <div class="warn-card">
+          <span class="icon-big">😴</span>
+          <h3>Apathisch / taumelig</h3>
+          <p>Reagiert nicht auf Annäherung, liegt flach, taumelt oder rollt sich nicht ein.</p>
+        </div>
+        <div class="warn-card">
+          <span class="icon-big">⚖️</span>
+          <h3>Zu leicht im Herbst</h3>
+          <p>Unter <strong>500 g</strong> im Oktober / November – der Winterschlaf wäre tödlich.</p>
+        </div>
+        <div class="warn-card">
+          <span class="icon-big">👶</span>
+          <h3>Igel-Baby allein</h3>
+          <p>Kleiner Igel ohne Mama, Augen evtl. noch zu – <strong>sofort handeln</strong>, nicht warten!</p>
+        </div>
+        <div class="warn-card">
+          <span class="icon-big">🪱</span>
+          <h3>Parasitenbefall</h3>
+          <p>Stark mit Zecken, Flöhen, Fliegeneiern oder Maden befallen – kann tödlich enden.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SCHRITT FÜR SCHRITT ====== -->
+  <section class="bg-sun-bg">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">So gehst du vor</span>
+        <h2>Schritt für Schritt</h2>
+        <p>In dieser Reihenfolge – ohne Hektik, aber zügig.</p>
+      </div>
+
+      <div class="steps-list">
+        <div class="step-box">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Beobachten, nicht anfassen</h3>
+            <p>Schau aus Distanz: Ist der Igel verletzt? Liegt er flach? Taumelt er? Ist er tagsüber aktiv? Das sind die ersten Alarmzeichen.</p>
+            <ul class="step-list">
+              <li>Kinder &amp; Haustiere fernhalten</li>
+              <li>Aus 1–2 m beobachten, nicht stören</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Sicher in eine Kartonbox setzen</h3>
+            <p>Mit Handschuhen oder einem Handtuch vorsichtig aufnehmen. In einen hohen, gut belüfteten Karton mit Tuch &amp; Wasserschüssel setzen.</p>
+            <ul class="step-list">
+              <li>Karton mind. 50 cm hoch (sonst klettert er raus)</li>
+              <li>Mit altem Handtuch oder Zeitung auspolstern</li>
+              <li>Im warmen, geschützten Raum platzieren</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Wärme zuführen (falls kalt)</h3>
+            <p>Schwache, kalte Tiere brauchen sofort Wärme. Eine lauwarme Wärmflasche oder PET-Flasche mit warmem Wasser unter ein Handtuch legen.</p>
+            <ul class="step-list">
+              <li>Wärme = lauwarm, NICHT heiß</li>
+              <li>Hälfte der Box mit Wärme – andere Hälfte zum Wegrobben</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-box danger">
+          <div class="step-num">4</div>
+          <div>
+            <h3>Sofort anrufen – nicht erst füttern!</h3>
+            <p>Ursula entscheidet, ob der Igel zu ihr kommt oder direkt zum Tierarzt. <strong>Vorher nichts geben</strong> – falsches Futter kann mehr schaden als helfen.</p>
+            <a href="tel:+436502699710" class="btn" style="background: var(--accent-red); color: var(--cream-warm); margin-top: 14px;">📞 0650 / 269 97 10</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== DON'TS ====== -->
+  <section class="bg-cream">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Bitte unbedingt vermeiden</span>
+        <h2>Das darfst du <em>auf keinen Fall</em> tun</h2>
+        <p>Mit den besten Absichten kann man einem Igel das Leben schwer machen. Diese 8 Punkte können tödlich sein.</p>
+      </div>
+
+      <div class="donts-box">
+        <h3>🚫 Die 8 No-Gos</h3>
+        <ul>
+          <li><strong>Milch geben</strong> – Durchfall, lebensgefährlich</li>
+          <li><strong>Obst oder Brot</strong> – Igel ist Insektenfresser</li>
+          <li><strong>In die Sonne stellen</strong> – Überhitzungsgefahr</li>
+          <li><strong>Zu früh „auswildern"</strong> ohne Beratung</li>
+          <li><strong>Im Auto im Karton vergessen</strong> – Hitze!</li>
+          <li><strong>Im Bad/Wanne baden</strong> – Stress, Lungenentzündung</li>
+          <li><strong>Mit Wattestäbchen reinigen</strong> – verletzt</li>
+          <li><strong>Selbst entwurmen / „Medizin geben"</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== KONTAKTFORMULAR ====== -->
+  <section class="bg-cream">
+    <div class="container">
+      <div class="contact-form-wrap">
+        <h2>Lieber schreiben statt anrufen?</h2>
+        <p>Bei akuten Notfällen <strong>bitte immer anrufen</strong>. Für Rückfragen, Hinweise oder Bilder geht es auch hier.</p>
+        <form onsubmit="alert('Vielen Dank! Wir melden uns so schnell wie möglich.'); return false;" style="margin-top: 18px;">
+          <div class="form-row">
+            <div>
+              <label>Dein Name</label>
+              <input type="text" required placeholder="Vor- &amp; Nachname">
+            </div>
+            <div>
+              <label>Telefonnummer</label>
+              <input type="tel" placeholder="für Rückruf">
+            </div>
+          </div>
+          <div class="form-row">
+            <div>
+              <label>E-Mail</label>
+              <input type="email" required placeholder="du@example.com">
+            </div>
+            <div>
+              <label>Ort des Fundes</label>
+              <input type="text" placeholder="z. B. Feistritz, Garten">
+            </div>
+          </div>
+          <div>
+            <label>Was ist passiert?</label>
+            <textarea required placeholder="Beschreib kurz, wo &amp; wie du den Igel gefunden hast"></textarea>
+          </div>
+          <button type="submit">Nachricht senden →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CTA ====== -->
+  <section class="bg-sun-bg compact">
+    <div class="container text-center">
+      <p class="big-quote" style="margin-bottom: 30px;">
+        Im Zweifel: lieber einmal zu viel anrufen.
+        <cite>— Ursula</cite>
+      </p>
+      <a href="tel:+436502699710" class="giant-phone" style="background: var(--accent-red); color: var(--cream-warm); border-color: var(--ink); font-size: 1.6rem;">
+        📞 0650 / 269 97 10
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<script src="assets/partials.js"></script>
+</body>
+</html>

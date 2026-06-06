@@ -1,0 +1,3730 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOS Igel in Not · Lehr- und Lernpfad Drautal · Feistritz/Drau</title>
+<meta name="description" content="Igelstation und Lehr- und Lernpfad in Feistritz an der Drau – Soforthilfe für verletzte, kranke und verwaiste Igel. Notfallnummer: 0650/269 97 10. Ursula Ertl.">
+<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="/styles/improvements.css">
+<style>
+/* ==========================================================
+   NEUES FARBSYSTEM – Sonnen-Gelb (warmer Honig) + Tief-Bark
+   ========================================================== */
+:root {
+  --sun: #F5C13C;            /* Hauptfarbe: warmes Honig-Gelb */
+  --sun-soft: #F8D571;
+  --sun-deep: #D89A1A;       /* Hover */
+  --sun-bg: #FBE5A8;         /* helles Gelb für sanfte Flächen */
+  --ink: #2B1F12;            /* tiefes Bark/Schwarzbraun */
+  --ink-soft: #4A3520;
+  --cream-warm: #FDF6E3;     /* sehr helles Creme */
+  --leaf: #4A5D2E;           /* gedämpftes Olive für Hinweise */
+  --accent-red: #C13B2A;     /* Notfall-Akzent in der Palette */
+}
+
+body { background: var(--cream-warm); color: var(--ink); }
+
+/* === Header & Banner farblich anpassen === */
+.saison-banner {
+  background: var(--sun) !important;
+  color: var(--ink) !important;
+}
+.site-header { background: rgba(253, 246, 227, 0.96) !important; border-bottom: 1px solid rgba(43, 31, 18, 0.08); }
+.nav a { color: var(--ink); }
+.nav a.active { background: var(--ink); color: var(--sun); }
+.nav a:hover { color: var(--ink); background: var(--sun-bg); }
+.logo-text strong { color: var(--ink); }
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--sun);
+}
+.btn-primary:hover { background: var(--ink-soft); color: var(--sun); }
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+}
+.btn-secondary:hover { background: var(--ink); color: var(--sun); }
+
+/* ============ HERO – Sonnen-Gelb-Block ============ */
+.hero-sun {
+  background: var(--sun);
+  position: relative;
+  overflow: hidden;
+  padding: 60px 0 90px;
+  color: var(--ink);
+}
+.hero-sun::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 12% 90%, rgba(43, 31, 18, 0.06) 0, transparent 22%),
+    radial-gradient(circle at 90% 8%, rgba(255, 255, 255, 0.18) 0, transparent 30%);
+  pointer-events: none;
+}
+/* Mini-Nav-Pillen oben im Hero – wie im Inspirationsbild */
+.hero-pills {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+.hero-pill {
+  background: var(--ink);
+  color: var(--sun);
+  padding: 9px 20px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: all 0.2s;
+  letter-spacing: 0.01em;
+  border: 2px solid var(--ink);
+}
+.hero-pill:hover { transform: translateY(-2px); text-decoration: none; }
+.hero-pill.logo-pill {
+  background: var(--cream-warm);
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px 6px 8px;
+}
+.hero-pill.logo-pill img { width: 28px; height: 28px; border-radius: 50%; }
+.hero-pill.hero-pill-wissen {
+  background: var(--leaf);
+  color: var(--cream-warm);
+  border-color: var(--ink);
+}
+.hero-pill.hero-pill-mit {
+  background: var(--cream-warm);
+  color: var(--ink);
+}
+.hero-pill.hero-pill-not {
+  background: var(--accent-red);
+  color: var(--cream-warm);
+  border-color: var(--ink);
+  animation: pillPulse 2.2s ease-in-out infinite;
+}
+@keyframes pillPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(43, 31, 18, 0.4); }
+  50%      { box-shadow: 0 0 0 8px rgba(43, 31, 18, 0); }
+}
+
+.hero-tags {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+}
+.hero-tag {
+  background: var(--cream-warm);
+  color: var(--ink);
+  padding: 5px 16px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-headline {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: clamp(2.8rem, 8.5vw, 6.2rem);
+  line-height: 1;
+  text-align: center;
+  color: var(--ink);
+  margin: 0 auto 30px;
+  max-width: 1080px;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 2;
+}
+.hero-headline .inline-icon {
+  display: inline-block;
+  width: 0.95em;
+  height: 0.95em;
+  margin: 0 0.08em -0.12em;
+  border-radius: 50%;
+  background: var(--ink);
+  vertical-align: baseline;
+  position: relative;
+}
+.hero-headline .inline-icon.heart {
+  background: transparent;
+  font-size: 0.9em;
+  line-height: 1;
+  color: var(--accent-red);
+}
+.hero-headline .inline-icon.igel {
+  background: url('/cdn-img/logo-sos-igel.png') center/cover no-repeat;
+  border: 3px solid var(--ink);
+}
+.hero-sub {
+  text-align: center;
+  font-size: 1.15rem;
+  max-width: 640px;
+  margin: 0 auto 32px;
+  color: var(--ink-soft);
+  position: relative;
+  z-index: 2;
+}
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+.hero-cta .btn-dark {
+  background: var(--ink);
+  color: var(--sun);
+  padding: 16px 32px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+}
+.hero-cta .btn-dark:hover { background: var(--ink-soft); color: var(--sun); text-decoration: none; transform: translateY(-2px); }
+.hero-cta .btn-light {
+  background: var(--cream-warm);
+  color: var(--ink);
+  padding: 16px 32px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid var(--ink);
+  transition: all 0.2s;
+}
+.hero-cta .btn-light:hover { background: var(--ink); color: var(--sun); text-decoration: none; }
+
+/* Mini-Fakten unter dem Hero */
+.hero-facts-row {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 56px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+.hero-facts-row .fact {
+  text-align: center;
+}
+.hero-facts-row .fact strong {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--ink);
+  font-weight: 800;
+}
+.hero-facts-row .fact span {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 8px;
+  display: block;
+}
+
+@media (max-width: 720px) {
+  .hero-sun { padding: 36px 0 64px; }
+  .hero-pills { gap: 6px; }
+  .hero-pill { padding: 6px 12px; font-size: 0.78rem; }
+  .hero-facts-row { gap: 26px; }
+  .hero-facts-row .fact strong { font-size: 2rem; }
+}
+
+/* ============ SECTION-HEADERS NEU ============ */
+.section-header { text-align: center; max-width: 760px; margin: 0 auto 56px; }
+.section-header .eyebrow {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--sun-deep);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+.section-header h2 { color: var(--ink); }
+.section-header p { color: var(--ink-soft); font-size: 1.1rem; }
+
+/* ============ URSULA – jetzt ZUERST ============ */
+.ursula-first {
+  background: var(--cream-warm);
+  padding: 90px 0;
+  position: relative;
+}
+.ursula-grid-new {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 64px;
+  align-items: center;
+}
+.ursula-photo-block {
+  position: relative;
+  aspect-ratio: 4/5;
+  max-width: 480px;
+}
+.ursula-photo-block .frame {
+  position: absolute;
+  inset: 0;
+  background: var(--sun);
+  border-radius: 24px;
+  transform: rotate(-2deg);
+  z-index: 1;
+}
+.ursula-photo-block .photo {
+  position: absolute;
+  inset: 12px;
+  border-radius: 20px;
+  background: url('/cdn-img/cropped/ursula-ertl.jpg') center/cover no-repeat;
+  z-index: 2;
+  box-shadow: 0 16px 40px rgba(43, 31, 18, 0.18);
+}
+.ursula-photo-block .stamp {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  z-index: 3;
+  background: var(--ink);
+  color: var(--sun);
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  transform: rotate(6deg);
+  box-shadow: 0 10px 24px rgba(43, 31, 18, 0.25);
+}
+.ursula-text .ursula-eyebrow {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--sun);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.ursula-text h1 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: clamp(2.6rem, 5.5vw, 4rem);
+  line-height: 1.05;
+  color: var(--ink);
+  margin: 0 0 24px;
+  letter-spacing: -0.02em;
+}
+.ursula-text h1 .highlight {
+  background: var(--sun);
+  padding: 2px 12px;
+  border-radius: 8px;
+  font-style: italic;
+}
+.ursula-quote-bold {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1.4;
+  color: var(--ink);
+  border-left: 4px solid var(--sun);
+  padding-left: 20px;
+  margin: 24px 0;
+}
+.ursula-text p { color: var(--ink-soft); font-size: 1.05rem; line-height: 1.65; }
+.ursula-sig {
+  font-family: 'Caveat', cursive;
+  font-size: 1.9rem;
+  color: var(--sun-deep);
+  margin: 16px 0 24px;
+}
+.ursula-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 900px) {
+  .ursula-grid-new { grid-template-columns: 1fr; gap: 56px; }
+  .ursula-photo-block { max-width: 380px; margin: 0 auto; }
+}
+
+/* ============ LEHRPFAD-STATIONEN ============ */
+.lehrpfad-band {
+  background: var(--ink);
+  color: var(--cream-warm);
+  padding: 90px 0;
+  position: relative;
+}
+.lehrpfad-band .section-header h2 { color: var(--sun); }
+.lehrpfad-band .section-header .eyebrow { color: var(--sun-soft); }
+.lehrpfad-band .section-header p { color: rgba(253, 246, 227, 0.85); }
+
+.station-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(43,31,18,0.12);
+  border: 1px solid rgba(43,31,18,0.12);
+  border-radius: 18px;
+  overflow: hidden;
+}
+.station-card {
+  background: var(--cream-warm);
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 20px 20px;
+  transition: background 0.2s, color 0.2s;
+  position: relative;
+}
+.station-card:hover {
+  background: var(--ink);
+  color: var(--cream-warm);
+  text-decoration: none;
+  z-index: 1;
+}
+.station-card:hover h3,
+.station-card:hover .sc-tagline,
+.station-card:hover .sc-cat { color: var(--cream-warm); opacity: 1; }
+.station-card:hover .sc-arrow { color: var(--sun); }
+
+/* Kopfzeile: Nummer + Kategorie */
+.station-card .sc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.station-card .sc-num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--sun-deep);
+  line-height: 1;
+}
+.station-card:hover .sc-num { color: var(--sun); }
+.station-card .sc-cat {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: rgba(43,31,18,0.07);
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+.station-card:hover .sc-cat {
+  background: rgba(253,246,227,0.15);
+  color: rgba(253,246,227,0.75);
+}
+.station-card .sc-body { flex: 1; display: flex; flex-direction: column; }
+.station-card h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  margin: 0 0 7px;
+  color: var(--ink);
+  font-family: inherit;
+  font-style: normal;
+  line-height: 1.25;
+}
+.station-card .sc-tagline {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+  flex: 1;
+  line-height: 1.45;
+}
+.station-card .sc-arrow {
+  font-size: 1.1rem;
+  color: var(--sun-deep);
+  font-weight: 700;
+  align-self: flex-end;
+  transition: transform 0.2s;
+}
+.station-card:hover .sc-arrow { transform: translateX(4px); }
+
+@media (max-width: 900px) { .station-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .station-grid { grid-template-columns: 1fr; } }
+
+.lehrpfad-cta-row {
+  text-align: center;
+  margin-top: 50px;
+}
+.lehrpfad-cta-row .btn-sun {
+  background: var(--sun);
+  color: var(--ink);
+  padding: 16px 32px;
+  border-radius: 999px;
+  font-weight: 800;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.lehrpfad-cta-row .btn-sun:hover { background: var(--sun-soft); color: var(--ink); text-decoration: none; transform: translateY(-2px); }
+
+/* ============ WISSEN MOSAIC ============ */
+.wissen-band { background: var(--cream-warm); padding: 90px 0; }
+.wissen-mosaic {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 280px;
+  gap: 16px;
+}
+.wm-card {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: block;
+  text-decoration: none;
+  color: var(--ink);
+}
+.wm-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(43, 31, 18, 0.18); text-decoration: none; }
+.wm-card .wm-img { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s; }
+.wm-card:hover .wm-img { transform: scale(1.06); }
+.wm-card .wm-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(43, 31, 18, 0.92) 0%, rgba(43, 31, 18, 0.55) 40%, transparent 75%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 22px;
+  color: var(--cream-warm);
+}
+.wm-card .wm-tag {
+  display: inline-block;
+  background: var(--sun);
+  color: var(--ink);
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+  align-self: flex-start;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.wm-card h3 {
+  color: var(--cream-warm);
+  font-size: 1.45rem;
+  margin: 0 0 6px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+}
+.wm-card p { margin: 0; font-size: 0.9rem; color: rgba(253, 246, 227, 0.92); line-height: 1.4; }
+.wm-card .wm-arrow {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--sun);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+.wm-card.big { grid-column: span 6; grid-row: span 1; }
+.wm-card.med { grid-column: span 6; grid-row: span 1; }
+.wm-card.std { grid-column: span 4; grid-row: span 1; }
+@media (max-width: 900px) {
+  .wissen-mosaic { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
+  .wm-card.big, .wm-card.med, .wm-card.std { grid-column: span 2; grid-row: span 1; }
+}
+
+/* =====================================================
+   #StopptKinderarmut-INSPIRIERTER STIL
+   ===================================================== */
+:root {
+  --mint: #6FB8B0;        /* Mintgrün */
+  --mint-deep: #4E928A;
+  --yellow-flash: #FAEC30; /* Knall-Gelb */
+  --pink-flash:  #FF0080;  /* Pink-Magenta */
+  --orange-flash: #FF8C00;
+  --black-flash: #1A1A1A;  /* Tief-Schwarz */
+}
+
+/* Top-Farbleiste (4 dünne Streifen) */
+.top-stripe-bar {
+  display: flex;
+  height: 6px;
+  width: 100%;
+}
+.top-stripe-bar > div { flex: 1; }
+.top-stripe-bar .s-yellow { background: var(--yellow-flash); }
+.top-stripe-bar .s-orange { background: var(--orange-flash); }
+.top-stripe-bar .s-pink   { background: var(--pink-flash); }
+.top-stripe-bar .s-mint   { background: var(--mint); }
+
+/* Vertikaler Schriftzug rechts am Rand */
+.side-tag-vertical {
+  position: fixed;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  font-family: 'Anton', 'Arial Black', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 5;
+  display: none; /* nur ab tablet */
+}
+@media (min-width: 900px) { .side-tag-vertical { display: block; } }
+
+/* Schwarzer Trennstrich vor Headline */
+.bar-headline {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 18px;
+}
+.bar-headline::before {
+  content: '';
+  width: 40px;
+  height: 4px;
+  background: var(--ink);
+  flex-shrink: 0;
+}
+.bar-headline.white-bar::before { background: var(--cream-warm); }
+.bar-headline.yellow-bar::before { background: var(--yellow-flash); }
+
+/* Bold Caps-Headline (Anton/Impact-Style) */
+.flash-h2 {
+  font-family: 'Anton', 'Arial Black', 'Impact', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  line-height: 1;
+  color: var(--ink);
+  margin: 0;
+}
+.flash-h1 {
+  font-family: 'Anton', 'Arial Black', 'Impact', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  line-height: 0.95;
+  margin: 0 0 20px;
+  color: var(--ink);
+}
+
+/* Flash-Block (vollflächiger farbiger Bereich) */
+.flash-block {
+  padding: 60px 56px;
+  position: relative;
+}
+@media (max-width: 700px) { .flash-block { padding: 40px 28px; } }
+.flash-block.fb-mint   { background: var(--mint); color: var(--ink); }
+.flash-block.fb-yellow { background: var(--yellow-flash); color: var(--ink); }
+.flash-block.fb-black  { background: var(--black-flash); color: var(--cream-warm); }
+.flash-block.fb-cream  { background: var(--cream-warm); color: var(--ink); }
+.flash-block.fb-pink   { background: var(--pink-flash); color: var(--cream-warm); }
+.flash-block.fb-orange { background: var(--orange-flash); color: var(--ink); }
+
+.flash-block.fb-black .flash-h2,
+.flash-block.fb-black .flash-h1 { color: var(--cream-warm); }
+.flash-block.fb-black .bar-headline::before { background: var(--yellow-flash); }
+.flash-block.fb-pink .flash-h2,
+.flash-block.fb-pink .flash-h1 { color: var(--cream-warm); }
+.flash-block.fb-pink .bar-headline::before { background: var(--yellow-flash); }
+
+.flash-block p {
+  font-size: 1.02rem;
+  line-height: 1.55;
+  max-width: 500px;
+  margin: 0 0 18px;
+}
+.flash-block .flash-link {
+  font-family: 'Anton', 'Arial Black', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 3px solid currentColor;
+  padding-bottom: 2px;
+}
+.flash-block .flash-link:hover { color: inherit; text-decoration: none; transform: translateX(4px); }
+
+/* Flash-Band: 2 nebeneinander, ohne Container */
+.flash-band {
+  display: block;
+  width: 100%;
+}
+.flash-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+@media (max-width: 800px) { .flash-grid { grid-template-columns: 1fr; } }
+.flash-grid .flash-block { padding: 56px 64px; }
+@media (max-width: 700px) { .flash-grid .flash-block { padding: 36px 28px; } }
+
+/* === Transparente Background-Watermarks === */
+.bg-watermark {
+  position: relative;
+  overflow: hidden;
+}
+.bg-watermark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--wm, none);
+  background-size: var(--wm-size, contain);
+  background-repeat: no-repeat;
+  background-position: var(--wm-pos, right -80px center);
+  opacity: var(--wm-opacity, 0.12);
+  pointer-events: none;
+  filter: saturate(0.4);
+  mix-blend-mode: multiply;
+}
+.bg-watermark > * { position: relative; z-index: 1; }
+
+/* ===========================================
+   HERO 2.0 – Photo Split (hell & freundlich)
+   =========================================== */
+.hero-split {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 0% 100%, var(--sun-bg) 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 0%, var(--sun) 0%, transparent 50%),
+    var(--cream-warm);
+  color: var(--ink);
+  padding: 80px 0 0;
+  overflow: hidden;
+}
+.hero-split .container { position: relative; z-index: 3; }
+
+.hero-split-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  min-height: 600px;
+}
+@media (max-width: 900px) {
+  .hero-split-grid { grid-template-columns: 1fr; min-height: auto; }
+}
+
+.hs-text { padding: 40px 0; }
+.hs-eyebrow {
+  display: inline-block;
+  background: var(--accent-red);
+  color: var(--cream-warm);
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hs-text h1 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: clamp(3rem, 7vw, 5.6rem);
+  line-height: 0.98;
+  color: var(--ink);
+  margin: 0 0 24px;
+  letter-spacing: -0.025em;
+}
+.hs-text h1 span.sun-mark {
+  background: var(--accent-red);
+  color: var(--cream-warm);
+  padding: 4px 14px;
+  border-radius: 10px;
+  display: inline-block;
+  transform: rotate(-1.5deg);
+}
+.hs-text p.hs-lead {
+  font-size: 1.18rem;
+  color: var(--ink-soft);
+  margin: 0 0 32px;
+  max-width: 520px;
+  line-height: 1.55;
+}
+.hs-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.hs-btn-red {
+  background: var(--accent-red);
+  color: var(--cream-warm);
+  padding: 16px 32px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 22px rgba(193, 59, 42, 0.30);
+}
+.hs-btn-red:hover { background: var(--accent-red-deep); color: var(--cream-warm); transform: translateY(-2px); text-decoration: none; }
+.hs-btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  padding: 16px 32px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid var(--ink);
+  transition: all 0.2s;
+}
+.hs-btn-ghost:hover { background: var(--ink); color: var(--sun); text-decoration: none; }
+.hs-btn-sun {
+  background: var(--sun);
+  color: var(--ink);
+  padding: 16px 32px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 22px rgba(245, 193, 60, 0.40);
+  border: 2px solid transparent;
+}
+.hs-btn-sun:hover { background: #e8b12a; color: var(--ink); transform: translateY(-2px); text-decoration: none; box-shadow: 0 12px 28px rgba(245, 193, 60, 0.55); }
+
+/* Photo-Block rechts */
+.hs-photo {
+  position: relative;
+  height: 100%;
+  min-height: 540px;
+}
+.hs-photo .photo-main {
+  position: absolute;
+  inset: 20px 0 20px 0;
+  background-image: url('/cdn-img/cropped/ursula-ertl.jpg');
+  background-size: cover;
+  /* Gesicht + Igel vollständig sichtbar – Fokus oben-mitte */
+  background-position: 30% 15%;
+  border-radius: 24px;
+  box-shadow: 0 24px 50px rgba(43, 31, 18, 0.22);
+  border: 5px solid var(--cream-warm);
+}
+.hs-photo .photo-mini {
+  position: absolute;
+  bottom: -20px;
+  left: -40px;
+  width: 200px;
+  height: 200px;
+  background-image: url('/cdn-img/cropped/igel-baby-handtuch.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 24px;
+  border: 5px solid var(--cream-warm);
+  box-shadow: 0 14px 30px rgba(43, 31, 18, 0.25);
+  z-index: 2;
+}
+.hs-photo .photo-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: var(--sun);
+  color: var(--ink);
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 0.9rem;
+  border: 3px solid var(--ink);
+  transform: rotate(6deg);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 14px rgba(43, 31, 18, 0.2);
+}
+
+@media (max-width: 900px) {
+  .hs-photo { min-height: 380px; }
+  .hs-photo .photo-mini { width: 140px; height: 140px; left: -10px; bottom: -10px; }
+}
+
+/* Fabrik-Linien im Hintergrund */
+.hero-split .geo-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  z-index: 1;
+}
+
+/* Banksy-Igel mit Herzballon dezent oben rechts */
+.hero-banksy {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  width: 260px;
+  height: 260px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.30;
+  mix-blend-mode: multiply;
+}
+.hero-banksy img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+@media (max-width: 900px) {
+  .hero-banksy { width: 160px; height: 160px; top: 10px; right: 10px; opacity: 0.22; }
+}
+
+/* Logo unten rechts in der Ecke des Hauptfotos */
+.hs-photo .photo-main { position: absolute; }
+.hs-photo .logo-stamp {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  width: 64px;
+  height: 64px;
+  background: var(--cream-warm);
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  box-shadow: 0 6px 16px rgba(43, 31, 18, 0.25);
+  overflow: hidden;
+  z-index: 4;
+}
+.hs-photo .logo-stamp img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 900px) {
+  .hs-photo .logo-stamp { width: 52px; height: 52px; bottom: 10px; right: 10px; }
+}
+
+/* Hero-Stats unten */
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 2px dashed rgba(43, 31, 18, 0.20);
+  flex-wrap: wrap;
+}
+.hero-stats .hs-stat strong {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 2.4rem;
+  color: var(--accent-red);
+  line-height: 1;
+}
+.hero-stats .hs-stat span {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 6px;
+  display: block;
+}
+
+/* ===========================================
+   DIAMOND-GRID (Mix aus "What we do")
+   =========================================== */
+.diamond-section {
+  background: var(--cream-warm);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.diamond-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+  transform: rotate(-3deg);
+}
+@media (max-width: 900px) { .diamond-grid { grid-template-columns: 1fr 1fr; transform: none; } }
+@media (max-width: 540px) { .diamond-grid { grid-template-columns: 1fr; } }
+
+.dia-tile {
+  aspect-ratio: 1;
+  border-radius: 18px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+  transition: all 0.3s;
+  box-shadow: 0 8px 24px rgba(43, 31, 18, 0.15);
+}
+.dia-tile:hover {
+  transform: translateY(-8px) rotate(2deg);
+  box-shadow: 0 18px 40px rgba(43, 31, 18, 0.25);
+  text-decoration: none;
+}
+.dia-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--tile-color, var(--ink)) 0%, rgba(43, 31, 18, 0.5) 100%);
+  opacity: 0.85;
+  transition: opacity 0.3s;
+}
+.dia-tile:hover::before { opacity: 0.7; }
+.dia-tile .dia-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--cream-warm);
+}
+.dia-tile .dia-icon-tile {
+  font-size: 2.2rem;
+  align-self: flex-end;
+}
+.dia-tile h3 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  margin: 0 0 6px;
+  color: var(--cream-warm);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.dia-tile p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+.dia-tile .dia-cta {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--sun);
+  color: var(--ink);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  align-self: flex-start;
+}
+
+/* Tile-Farben */
+.dia-tile.t-lehrpfad { --tile-color: var(--leaf); }
+.dia-tile.t-wissen { --tile-color: var(--berry); }
+.dia-tile.t-mitmachen { --tile-color: var(--sun-deep); }
+.dia-tile.t-mitmachen .dia-cta { background: var(--accent-red); color: var(--cream-warm); }
+.dia-tile.t-notfall { --tile-color: var(--accent-red); }
+.dia-tile.t-notfall .dia-cta { background: var(--cream-warm); color: var(--accent-red); }
+
+.diamond-section .section-header { transform: rotate(0); }
+
+/* ============ MISSION-BAND – Sonne ============ */
+.mission-sun {
+  background: var(--sun);
+  color: var(--ink);
+  padding: 90px 0;
+  position: relative;
+  overflow: hidden;
+}
+.mission-sun .section-header .eyebrow { color: var(--ink); }
+.mission-sun h2 { color: var(--ink); }
+.mission-sun .section-header p { color: var(--ink-soft); }
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  counter-reset: step;
+}
+.step-card {
+  background: var(--cream-warm);
+  border-radius: 18px;
+  padding: 36px 28px 28px;
+  position: relative;
+  counter-increment: step;
+  border: 2px solid var(--ink);
+}
+.step-card::before {
+  content: counter(step);
+  position: absolute;
+  top: -22px;
+  left: 24px;
+  background: var(--ink);
+  color: var(--sun);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+.step-card h3 {
+  margin-top: 10px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--ink);
+}
+.step-card p { color: var(--ink-soft); }
+.step-card a { color: var(--ink); font-weight: 800; border-bottom: 2px solid var(--sun-deep); }
+@media (max-width: 780px) { .steps-grid { grid-template-columns: 1fr; gap: 36px; } }
+
+/* ============ ENTSTEHUNG ============ */
+.entstehung {
+  background: var(--ink);
+  color: var(--cream-warm);
+  padding: 90px 0;
+}
+.entstehung h2, .entstehung .section-header p { color: var(--cream-warm); }
+.entstehung .section-header .eyebrow { color: var(--sun-soft); }
+.entstehung h2 { color: var(--sun); }
+
+.gallery-strip {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.gallery-strip .tile {
+  aspect-ratio: 1;
+  border-radius: 14px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+.gallery-strip .tile:hover { transform: scale(1.04); }
+.gallery-strip .tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.55), transparent 60%);
+}
+.gallery-strip .tile .caption {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  right: 10px;
+  font-size: 0.78rem;
+  color: var(--cream-warm);
+  z-index: 2;
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+}
+.gallery-strip .tile.wide { grid-column: span 2; }
+.gallery-strip .tile.tall { grid-row: span 2; aspect-ratio: auto; }
+@media (max-width: 900px) { .gallery-strip { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 540px) {
+  .gallery-strip { grid-template-columns: repeat(2, 1fr); }
+  .gallery-strip .tile.wide { grid-column: span 1; }
+}
+
+.entstehung-quote {
+  background: rgba(245, 193, 60, 0.10);
+  border-left: 4px solid var(--sun);
+  padding: 24px 28px;
+  border-radius: 12px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--sun-soft);
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ============ KAMPAGNE ============ */
+.kampagne {
+  background: var(--cream-warm);
+  color: var(--ink);
+  text-align: center;
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.kampagne::before {
+  content: '🦔';
+  position: absolute;
+  font-size: 28rem;
+  opacity: 0.05;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.kampagne .kamp-tag {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--sun);
+  padding: 6px 18px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  margin-bottom: 18px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 2;
+}
+.kampagne h2 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  color: var(--ink);
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  max-width: 880px;
+  margin: 0 auto 22px;
+  line-height: 1.1;
+  position: relative;
+  z-index: 2;
+}
+.kampagne h2 mark {
+  background: var(--sun);
+  color: var(--ink);
+  padding: 2px 10px;
+  border-radius: 6px;
+}
+.kampagne p {
+  font-size: 1.2rem;
+  max-width: 620px;
+  margin: 0 auto 28px;
+  color: var(--ink-soft);
+  position: relative;
+  z-index: 2;
+}
+.kampagne .btn-ink {
+  background: var(--ink);
+  color: var(--sun);
+  padding: 16px 32px;
+  border-radius: 999px;
+  font-weight: 800;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+}
+.kampagne .btn-ink:hover { background: var(--ink-soft); color: var(--sun); text-decoration: none; }
+
+/* ============ QUICKLINKS ============ */
+.ql-band { background: var(--cream-warm); padding: 90px 0; }
+.ql-bold {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.ql-card-bold {
+  background: var(--cream-warm);
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  padding: 24px 22px;
+  text-decoration: none;
+  color: var(--ink);
+  display: block;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.ql-card-bold:hover {
+  background: var(--sun);
+  transform: translateY(-4px);
+  text-decoration: none;
+  color: var(--ink);
+}
+.ql-card-bold .ql-icon-bold {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: var(--sun);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  margin-bottom: 14px;
+  transition: background 0.25s;
+}
+.ql-card-bold:hover .ql-icon-bold { background: var(--ink); color: var(--sun); }
+.ql-card-bold h3 {
+  font-size: 1.1rem;
+  margin: 0 0 6px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--ink);
+}
+.ql-card-bold p { font-size: 0.88rem; color: var(--ink-soft); margin: 0 0 8px; }
+.ql-card-bold .arrow { color: var(--ink); font-weight: 800; font-size: 0.9rem; }
+
+@media (max-width: 900px) { .ql-bold { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .ql-bold { grid-template-columns: 1fr; } }
+
+/* ============ EMERGENCY-CTA ============ */
+.emergency-cta {
+  background: var(--accent-red);
+  color: var(--cream-warm);
+  border-radius: 28px;
+  padding: 56px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.emergency-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 90% 20%, rgba(255,255,255,0.12), transparent 40%);
+  pointer-events: none;
+}
+.emergency-cta h2 { color: var(--cream-warm); margin-bottom: 14px; font-family: 'Fraunces', serif; font-style: italic; }
+.emergency-cta p { font-size: 1.15rem; opacity: 0.95; max-width: 620px; margin: 0 auto 28px; }
+.emergency-cta .phone-big {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--cream-warm);
+  color: var(--accent-red);
+  padding: 20px 36px;
+  border-radius: 999px;
+  font-family: 'Fraunces', serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+}
+.emergency-cta .phone-big:hover { transform: translateY(-3px) scale(1.02); text-decoration: none; color: var(--accent-red); }
+
+/* ============ DANKESCHÖN-SEKTION (kompakt) ============ */
+.danke {
+  background: var(--cream-warm);
+  padding: 70px 0;
+}
+.danke-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  align-items: center;
+  background: var(--sun-bg);
+  border: 1.5px solid var(--ink);
+  border-radius: 20px;
+  padding: 28px 32px;
+}
+.danke-inner .danke-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1.5px solid var(--ink);
+}
+.danke-inner .danke-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.danke-inner h3 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.6rem;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.danke-inner h3 .heart { color: var(--accent-red); }
+.danke-inner p {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  line-height: 1.55;
+  margin: 0 0 6px;
+}
+.danke-inner .sig {
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  color: var(--ink);
+  margin-top: 8px;
+}
+@media (max-width: 700px) {
+  .danke-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 24px;
+  }
+  .danke-inner .danke-photo { margin: 0 auto; width: 160px; height: 160px; }
+}
+
+/* =====================================================
+   NATURGARTEN-Sektion (gross, mit Tipps)
+   ===================================================== */
+.naturgarten-band {
+  background: var(--cream-warm);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.naturgarten-band::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--leaf) 0%, transparent 70%);
+  opacity: 0.10;
+  pointer-events: none;
+}
+.naturgarten-band::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  right: -150px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, var(--sun) 0%, transparent 70%);
+  opacity: 0.18;
+  pointer-events: none;
+}
+.naturgarten-band > .container { position: relative; z-index: 2; }
+
+.ng-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 56px;
+}
+.ng-header h2 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  line-height: 1.05;
+  color: var(--ink);
+  margin: 18px 0 14px;
+}
+.ng-header h2 em {
+  background: var(--leaf);
+  color: var(--cream-warm);
+  padding: 4px 14px;
+  border-radius: 10px;
+  font-style: italic;
+  display: inline-block;
+  transform: rotate(-1deg);
+}
+.ng-header p {
+  color: var(--ink-soft);
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+
+/* === Hero: Bild + Text === */
+.ng-hero {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+@media (max-width: 900px) { .ng-hero { grid-template-columns: 1fr; gap: 32px; } }
+
+.ng-hero-img {
+  position: relative;
+  aspect-ratio: 4/3;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(43, 31, 18, 0.22);
+  border: 5px solid var(--cream-warm);
+}
+.ng-hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ng-hero-badge {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: var(--cream-warm);
+  border: 2.5px solid var(--ink);
+  border-radius: 16px;
+  padding: 12px 18px;
+  box-shadow: 0 6px 16px rgba(43, 31, 18, 0.2);
+}
+.ng-hero-badge strong {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+.ng-hero-badge span {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.ng-hero-text h3 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--ink);
+  margin: 0 0 16px;
+  line-height: 1.15;
+}
+.ng-hero-text h3 em {
+  background: var(--sun);
+  color: var(--ink);
+  padding: 2px 10px;
+  border-radius: 8px;
+  font-style: italic;
+}
+.ng-hero-text p {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+.ng-mini-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 24px;
+}
+@media (max-width: 540px) { .ng-mini-stats { grid-template-columns: 1fr; } }
+.ng-mini-stats > div {
+  background: var(--cream-warm);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  padding: 14px 12px;
+  text-align: center;
+}
+.ng-mini-stats strong {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--accent-red);
+  line-height: 1;
+  display: block;
+}
+.ng-mini-stats span {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  font-weight: 700;
+  margin-top: 4px;
+  display: block;
+}
+
+/* === Tipp-Karten === */
+.ng-tips-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 56px;
+}
+@media (max-width: 900px) { .ng-tips-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .ng-tips-grid { grid-template-columns: 1fr; } }
+
+.ng-tip {
+  background: var(--cream-warm);
+  border: 2.5px solid var(--ink);
+  border-radius: 22px;
+  padding: 26px 24px;
+  position: relative;
+  transition: all 0.25s;
+  overflow: hidden;
+}
+.ng-tip:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(43, 31, 18, 0.18); }
+
+.ng-tip.card-1, .ng-tip.card-2 { padding-top: 220px; }
+.ng-tip.card-3 { background: var(--sun); }
+.ng-tip-img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+.ng-tip-num {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 1.8rem;
+  background: var(--sun);
+  color: var(--ink);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 2.5px solid var(--ink);
+  z-index: 2;
+}
+.ng-tip.card-1 .ng-tip-num,
+.ng-tip.card-2 .ng-tip-num { box-shadow: 0 4px 10px rgba(43, 31, 18, 0.3); }
+.ng-tip h4 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin: 0 0 10px;
+  padding-right: 60px;
+}
+.ng-tip p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+.ng-tip ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ng-tip ul li {
+  padding: 5px 0 5px 22px;
+  position: relative;
+  font-size: 0.9rem;
+  color: var(--ink);
+  line-height: 1.45;
+}
+.ng-tip ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 16px;
+  height: 16px;
+  background: var(--leaf);
+  color: var(--cream-warm);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+/* === CTA-Banner === */
+.ng-cta {
+  background: var(--ink);
+  color: var(--cream-warm);
+  border-radius: 24px;
+  padding: 32px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.ng-cta h3 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--sun);
+  margin: 0 0 6px;
+  font-size: 1.4rem;
+}
+.ng-cta p { margin: 0; color: rgba(253, 246, 227, 0.85); }
+
+/* =====================================================
+   WISSEN + QUIZ + SPIEL direkt auf der Homepage
+   ===================================================== */
+.wq-section {
+  background: var(--cream-warm);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.wq-bg-blob {
+  position: absolute;
+  top: -100px;
+  right: -150px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--sun) 0%, transparent 70%);
+  opacity: 0.30;
+  pointer-events: none;
+}
+.wq-section > .container { position: relative; z-index: 2; }
+
+.wq-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 22px;
+  align-items: stretch;
+}
+@media (max-width: 900px) { .wq-grid { grid-template-columns: 1fr; } }
+
+.wq-quiz,
+.wq-facts,
+.wq-memory {
+  background: var(--cream-warm);
+  border: 2.5px solid var(--ink);
+  border-radius: 24px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  min-height: 440px;
+}
+.wq-quiz { background: var(--sun); transform: rotate(-1deg); }
+.wq-facts { background: var(--cream-warm); transform: rotate(0.5deg); }
+.wq-memory { background: var(--ink); color: var(--cream-warm); transform: rotate(-0.5deg); }
+@media (max-width: 900px) {
+  .wq-quiz, .wq-facts, .wq-memory { transform: none; }
+}
+
+.wq-quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.wq-tag {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--sun);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.wq-counter {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wq-progress {
+  height: 10px;
+  background: rgba(43, 31, 18, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.wq-progress-bar {
+  background: var(--ink);
+  height: 100%;
+  width: 25%;
+  transition: width 0.4s;
+}
+
+.wq-q {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.35rem;
+  margin: 0 0 18px;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.wq-answers {
+  display: grid;
+  gap: 10px;
+  flex: 1;
+}
+.wq-answers button {
+  background: var(--cream-warm);
+  border: 2px solid var(--ink);
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+.wq-answers button:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--sun);
+  transform: translateX(4px);
+}
+.wq-answers button:disabled { cursor: default; }
+.wq-answers button.correct { background: var(--leaf); color: var(--cream-warm); border-color: var(--leaf); }
+.wq-answers button.wrong { background: var(--accent-red); color: var(--cream-warm); border-color: var(--accent-red); }
+
+.wq-feedback {
+  margin-top: 14px;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  min-height: 1.4em;
+  color: var(--ink);
+}
+
+/* === Fun Facts === */
+.wq-fact {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 14px 0;
+}
+.wq-fact-num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 4.5rem;
+  line-height: 1;
+  color: var(--accent-red);
+  margin-bottom: 12px;
+}
+.wq-fact-lbl {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+}
+.wq-fact-text {
+  color: var(--ink);
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 280px;
+}
+
+.wq-fact-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 12px;
+}
+.wq-fact-nav button {
+  background: var(--ink);
+  color: var(--sun);
+  border: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.wq-fact-nav button:hover { transform: scale(1.1); }
+.wq-fact-dots {
+  display: flex;
+  gap: 6px;
+}
+.wq-fact-dots span {
+  width: 8px;
+  height: 8px;
+  background: rgba(43, 31, 18, 0.25);
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+.wq-fact-dots span.active { background: var(--accent-red); width: 22px; border-radius: 999px; }
+
+/* === Memory mini === */
+.wq-memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  flex: 1;
+  margin: 4px 0 14px;
+}
+.wq-memory-card {
+  aspect-ratio: 1;
+  background: var(--sun);
+  border: 2px solid var(--sun-deep);
+  border-radius: 10px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  color: var(--sun);
+  transition: all 0.2s;
+}
+.wq-memory-card.flipped { background: var(--cream-warm); color: var(--ink); border-color: var(--cream-warm); }
+.wq-memory-card.matched { background: var(--leaf); color: var(--cream-warm); cursor: default; opacity: 0.65; border-color: var(--leaf); }
+.wq-memory-hint {
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 1.15rem;
+  color: var(--sun-soft);
+  margin: 0;
+}
+
+.wq-mini-btn {
+  background: var(--cream-warm);
+  color: var(--ink);
+  border: 2px solid var(--cream-warm);
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 0.78rem;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+.wq-mini-btn:hover { background: var(--sun); border-color: var(--sun); }
+
+/* === Memory-Spiel-Block unter Danke === */
+.memory-band {
+  background: var(--cream-warm);
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+.memory-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 48px;
+  align-items: center;
+  max-width: 980px;
+  margin: 0 auto;
+  background: var(--sun-bg);
+  border: 2.5px solid var(--ink);
+  border-radius: 28px;
+  padding: 48px 40px;
+}
+@media (max-width: 800px) {
+  .memory-inner { grid-template-columns: 1fr; padding: 32px 24px; gap: 28px; }
+}
+.memory-header h2 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  color: var(--ink);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  line-height: 1.1;
+  margin: 16px 0 12px;
+}
+.memory-header h2 em {
+  background: var(--sun);
+  color: var(--ink);
+  padding: 2px 12px;
+  border-radius: 8px;
+  font-style: italic;
+}
+.memory-header p { color: var(--ink-soft); line-height: 1.55; margin: 0 0 18px; }
+.memory-shuffle {
+  background: var(--ink);
+  color: var(--sun);
+  border: 0;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  font-family: inherit;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+.memory-shuffle:hover { background: var(--accent-red); color: var(--cream-warm); }
+
+.memory-grid-big {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 380px;
+  margin: 0 auto;
+}
+.memory-grid-big .wq-memory-card {
+  aspect-ratio: 1;
+  font-size: 2rem;
+  border-radius: 14px;
+  background: var(--ink);
+  border: 2.5px solid var(--ink);
+  color: var(--ink);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all 0.2s;
+}
+.memory-grid-big .wq-memory-card.flipped { background: var(--cream-warm); color: var(--ink); }
+.memory-grid-big .wq-memory-card.matched { background: var(--leaf); color: var(--cream-warm); cursor: default; opacity: 0.7; border-color: var(--leaf); }
+
+/* =====================================================
+   UNTERER SEITENBEREICH – Neu, kraftvoll
+   ===================================================== */
+
+/* === 3 Schritte – Bold mit Foto-Karten === */
+.steps-bold-section {
+  background: var(--cream-warm);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.steps-bold-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 80% 0%, var(--sun-bg) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 100%, rgba(193, 59, 42, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+.steps-bold-section > .container { position: relative; z-index: 2; }
+
+.steps-bold-header {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 56px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+@media (max-width: 800px) { .steps-bold-header { grid-template-columns: 1fr; gap: 20px; } }
+
+.steps-bold-title {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1;
+  color: var(--ink);
+  margin: 18px 0 0;
+  letter-spacing: -0.02em;
+}
+.steps-bold-title em {
+  background: var(--sun);
+  color: var(--ink);
+  padding: 4px 14px;
+  border-radius: 10px;
+  font-style: italic;
+  display: inline-block;
+  transform: rotate(-1deg);
+  margin-top: 4px;
+}
+.steps-bold-sub {
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.steps-bold-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 900px) { .steps-bold-grid { grid-template-columns: 1fr; } }
+
+.step-bold-card {
+  position: relative;
+  background: var(--cream-warm);
+  border: 2.5px solid var(--ink);
+  border-radius: 24px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--ink);
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  min-height: 460px;
+}
+.step-bold-card:hover {
+  transform: translateY(-8px) rotate(-1deg);
+  box-shadow: 0 18px 40px rgba(43, 31, 18, 0.20);
+  text-decoration: none;
+  color: var(--ink);
+}
+.step-bold-card .sb-photo {
+  height: 240px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.step-bold-card .sb-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(43, 31, 18, 0.5) 100%);
+}
+.step-bold-card .sb-num {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: var(--ink);
+  color: var(--sun);
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 1.3rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--cream-warm);
+  z-index: 2;
+}
+.step-bold-card .sb-body {
+  padding: 26px 26px 30px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.step-bold-card h3 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.7rem;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.step-bold-card p {
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.55;
+  margin: 0 0 18px;
+  flex: 1;
+}
+.step-bold-card .sb-arrow {
+  display: inline-block;
+  font-weight: 800;
+  color: var(--accent-red);
+  letter-spacing: 0.02em;
+}
+.step-bold-card.featured {
+  background: var(--sun);
+  transform: translateY(-12px);
+}
+.step-bold-card.featured:hover { transform: translateY(-18px) rotate(-1deg); }
+.step-bold-card.featured .sb-num { background: var(--accent-red); color: var(--cream-warm); }
+.step-bold-card.red {
+  background: var(--accent-red);
+  border-color: var(--ink);
+  color: var(--cream-warm);
+}
+.step-bold-card.red h3, .step-bold-card.red:hover h3 { color: var(--sun); }
+.step-bold-card.red p { color: rgba(253, 246, 227, 0.9); }
+.step-bold-card.red .sb-arrow { color: var(--sun); }
+.step-bold-card.red .sb-num { background: var(--cream-warm); color: var(--accent-red); border-color: var(--ink); }
+.step-bold-card.red:hover { color: var(--cream-warm); }
+
+/* === Entstehung – Polaroid-Wand === */
+.entstehung-bold {
+  background: var(--ink);
+  color: var(--cream-warm);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.entst-header { text-align: center; margin-bottom: 60px; max-width: 720px; margin-left: auto; margin-right: auto; }
+.entst-header h2 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  color: var(--sun);
+  margin: 18px 0 14px;
+  line-height: 1.05;
+}
+.entst-header h2 em {
+  background: var(--accent-red);
+  color: var(--cream-warm);
+  padding: 2px 12px;
+  border-radius: 8px;
+  font-style: italic;
+}
+.entst-header p { color: rgba(253, 246, 227, 0.82); font-size: 1.1rem; max-width: 580px; margin: 0 auto; }
+
+.polaroid-wall {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 64px;
+  padding: 0 20px;
+}
+@media (max-width: 900px) { .polaroid-wall { grid-template-columns: repeat(2, 1fr); } }
+
+.pw-item {
+  background-color: var(--cream-warm);
+  padding: 12px 12px 36px;
+  border-radius: 6px;
+  background-image: var(--bg);
+  background-size: cover;
+  background-position: center;
+  background-clip: content-box;
+  aspect-ratio: 3/4;
+  position: relative;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s;
+  cursor: default;
+}
+.pw-item::before {
+  content: '';
+  position: absolute;
+  inset: 12px 12px 36px 12px;
+  background-image: var(--bg);
+  background-size: cover;
+  background-position: center;
+}
+.pw-item span {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  right: 12px;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 1.15rem;
+  color: var(--ink);
+  z-index: 2;
+}
+.pw-item.r1 { transform: rotate(-3deg); }
+.pw-item.r2 { transform: rotate(2deg); }
+.pw-item.r-l { transform: rotate(-1.5deg) translateY(20px); }
+.pw-item.r-r { transform: rotate(2.5deg) translateY(-15px); }
+.pw-item:hover { transform: rotate(0) translateY(-6px) scale(1.04); z-index: 5; }
+@media (max-width: 700px) {
+  .pw-item.r1, .pw-item.r2, .pw-item.r-l, .pw-item.r-r { transform: none; }
+}
+
+.entst-quote-block {
+  text-align: center;
+  max-width: 740px;
+  margin: 0 auto;
+}
+.entst-quote-block .quote-text {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.6vw, 1.85rem);
+  line-height: 1.4;
+  color: var(--cream-warm);
+  margin: 0 0 28px;
+  position: relative;
+}
+.entst-quote-block .quote-text em {
+  background: var(--sun);
+  color: var(--ink);
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-style: italic;
+}
+.entst-quote-block .quote-cta-row {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* === Kampagne Bold === */
+.kampagne-bold {
+  background: var(--accent-red);
+  color: var(--cream-warm);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.kampagne-bold::before {
+  content: '🦔';
+  position: absolute;
+  font-size: 26rem;
+  opacity: 0.07;
+  top: 50%;
+  right: -40px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.kampagne-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 56px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 900px) { .kampagne-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+.kamp-text h2 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  color: var(--cream-warm);
+  font-size: clamp(2rem, 4.8vw, 3.4rem);
+  line-height: 1.05;
+  margin: 18px 0 18px;
+}
+.kamp-text .kamp-mark {
+  background: var(--sun);
+  color: var(--ink);
+  padding: 2px 10px;
+  border-radius: 8px;
+  font-style: italic;
+}
+.kamp-text p {
+  font-size: 1.15rem;
+  color: rgba(253, 246, 227, 0.92);
+  line-height: 1.6;
+}
+
+.kamp-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.kamp-stats .ks-tile {
+  background: var(--cream-warm);
+  color: var(--ink);
+  border-radius: 20px;
+  padding: 28px 24px;
+  text-align: center;
+  border: 3px solid var(--ink);
+  transition: transform 0.25s;
+}
+.kamp-stats .ks-tile:hover { transform: rotate(-2deg) translateY(-4px); }
+.kamp-stats .ks-tile.big {
+  grid-column: 1 / -1;
+  background: var(--sun);
+}
+.kamp-stats .ks-tile.alt {
+  background: var(--ink);
+  color: var(--sun);
+}
+.kamp-stats .ks-tile strong {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--accent-red);
+}
+.kamp-stats .ks-tile.alt strong { color: var(--sun); }
+.kamp-stats .ks-tile.big strong { font-size: 3.6rem; }
+.kamp-stats .ks-tile span {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.kamp-stats .ks-tile.alt span { color: rgba(253, 246, 227, 0.7); }
+
+/* === Mehr-Seiten (kompakt) === */
+.more-pages {
+  background: var(--cream-warm);
+  padding: 100px 0;
+}
+.more-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+@media (max-width: 900px) { .more-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 500px) { .more-grid { grid-template-columns: 1fr; } }
+
+.more-tile {
+  background: var(--cream-warm);
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  padding: 28px 24px;
+  text-decoration: none;
+  color: var(--ink);
+  display: block;
+  transition: all 0.25s;
+}
+.more-tile:hover {
+  background: var(--sun);
+  transform: translateY(-4px) rotate(-1deg);
+  text-decoration: none;
+  color: var(--ink);
+}
+.more-tile .mt-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--sun);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 1.7rem;
+  margin-bottom: 14px;
+  color: var(--ink);
+  transition: background 0.25s;
+}
+.more-tile:hover .mt-icon { background: var(--ink); color: var(--sun); }
+.more-tile h3 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+.more-tile p { font-size: 0.9rem; color: var(--ink-soft); margin: 0; }
+
+/* === Sticky SOS und Footer ans Schema === */
+.sticky-sos { background: var(--accent-red) !important; }
+.sticky-sos:hover { background: #A02E1F !important; }
+.site-footer { background: var(--ink); color: var(--cream-warm); }
+.site-footer a { color: var(--sun-soft); }
+.site-footer h4 { color: var(--sun); }
+
+/* Footer-Zitat / Header-Phone */
+.header-phone { background: var(--accent-red) !important; }
+</style>
+</head>
+<body data-page="start">
+
+<main>
+
+  <!-- Top-Farbleiste (4 Streifen) -->
+  <div class="top-stripe-bar">
+    <div class="s-yellow"></div>
+    <div class="s-orange"></div>
+    <div class="s-pink"></div>
+    <div class="s-mint"></div>
+  </div>
+
+  <!-- Vertikaler Schriftzug rechts -->
+  <div class="side-tag-vertical">#SOSIGELINNOT · LEHR- UND LERNPFAD · DRAUTAL</div>
+
+  <!-- ====== 1. HERO – Bold Photo Split ====== -->
+  <section class="hero-split">
+
+    <!-- Nur dezente Punkte im Hintergrund -->
+    <svg class="geo-lines" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">
+      <g fill="var(--ink)" opacity="0.18">
+        <circle cx="100" cy="200" r="4"/>
+        <circle cx="180" cy="240" r="3"/>
+        <circle cx="60" cy="280" r="2.5"/>
+        <circle cx="1050" cy="300" r="4"/>
+        <circle cx="1140" cy="380" r="3"/>
+        <circle cx="200" cy="540" r="3"/>
+        <circle cx="100" cy="600" r="2"/>
+      </g>
+      <g fill="var(--accent-red)" opacity="0.35">
+        <circle cx="200" cy="50" r="5"/>
+        <circle cx="350" cy="120" r="3"/>
+      </g>
+      <g fill="var(--sun-deep)" opacity="0.4">
+        <rect x="1080" y="490" width="14" height="14" transform="rotate(45 1087 497)"/>
+      </g>
+    </svg>
+
+    <div class="container">
+      <div class="hero-split-grid">
+        <div class="hs-text">
+          <span class="hs-eyebrow">🦔 Lehr- &amp; Lernpfad Drautal</span>
+          <h1>
+            Jeder Igel verdient<br>
+            eine <span class="sun-mark">zweite Chance</span>.
+          </h1>
+          <p class="hs-lead">
+            Hallo, schön dass du da bist! Mein Name ist <strong>Ursula</strong> und ich bin die <em>Projektleiterin</em> hinter dem Lehr- und Lernpfad im Drautal. Seit vielen Jahren pflege ich verletzte, kranke und verwaiste Igel – und auf unserem Pfad zeige ich dir, wie jeder Garten ganz einfach zu einem sicheren Zuhause für sie werden kann. Komm mit auf die Reise!
+          </p>
+          <div class="hs-cta-row">
+            <a href="tel:+436502699710" class="hs-btn-red">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Notruf: 0650 / 269 97 10
+            </a>
+            <a href="#diamond" class="hs-btn-ghost">Was wir machen →</a>
+            <a class='hs-btn-sun' href='/lehrpfad'>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M13 6l6 6-6 6"/></svg>
+              Lehr- &amp; Lernpfad
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="hs-stat"><strong>12</strong><span>Stationen</span></div>
+            <div class="hs-stat"><strong>24/7</strong><span>Notruf</span></div>
+            <div class="hs-stat"><strong>∞</strong><span>Igel-Leben</span></div>
+          </div>
+
+          <!-- Shop-Teaser -->
+          <a href='/shop' onmouseout='this.style.background=\'rgba(255,255,255,0.18)\'; this.style.transform=\'';' onmouseover='this.style.background=\'rgba(245,193,60,0.25)\'; this.style.transform=\'translateY(-2px)\';' style='
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            background: rgba(255,255,255,0.18);
+            border: 1.5px solid rgba(43,31,18,0.18);
+            border-radius: 14px;
+            padding: 10px 18px;
+            text-decoration: none;
+            color: var(--ink);
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: background 0.18s, transform 0.15s;
+            backdrop-filter: blur(4px);
+          '>
+            <span style="font-size:1.1rem;">🛒</span>
+            <span><strong>Igelhaus · Igelburg · Futterhaus</strong> – jetzt im Shop bestellen</span>
+            <span style="opacity:0.6; font-size:0.8rem;">→</span>
+          </a>
+        </div>
+
+        <div class="hs-photo">
+          <div class="photo-main" role="img" aria-label="Ursula Ertl mit gerettetem Igel">
+            <div class="logo-stamp">
+              <img src="/cdn-img/logo-sos-igel.png" alt="SOS Igel in Not Logo">
+            </div>
+          </div>
+          <div class="photo-mini" role="img" aria-label="Igel-Baby in Pflege"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 1.4 NOTFALL-SCHRITTE direkt nach Hero ====== -->
+  <section class="steps-bold-section">
+    <div class="container">
+      <div class="steps-bold-header">
+        <div>
+          <span class="hs-eyebrow" style="background: var(--accent-red);">🚨 Igel gefunden – was tun?</span>
+          <h2 class="steps-bold-title">Drei Schritte,<br><em>die jetzt zählen.</em></h2>
+        </div>
+        <p class="steps-bold-sub">
+          Nicht jeder Igel, der am Tag sichtbar ist, braucht Hilfe – aber im Zweifel: <strong>lieber einmal zu viel anrufen.</strong>
+        </p>
+      </div>
+
+      <div class="steps-bold-grid">
+        <a class='step-bold-card' href='/notfall'>
+          <div class="sb-photo" style="background-image: url('/cdn-img/cropped/igel-eingerollt.jpg');"></div>
+          <div class="sb-num">01</div>
+          <div class="sb-body">
+            <h3>Beobachten</h3>
+            <p>Liegt er flach? Taumelt er? Tagsüber aktiv? <strong>Hungerknick</strong> hinter dem Kopf? Alarmzeichen.</p>
+            <span class="sb-arrow">Mehr erfahren →</span>
+          </div>
+        </a>
+
+        <a class='step-bold-card featured' href='/notfall'>
+          <div class="sb-photo" style="background-image: url('/cdn-img/cropped/igel-baby-handtuch.jpg');"></div>
+          <div class="sb-num">02</div>
+          <div class="sb-body">
+            <h3>Wärme &amp; Schutz</h3>
+            <p>Karton mit Handtuch, lauwarme Wärmflasche. <strong>Nicht füttern, keine Milch</strong> – das wäre lebensgefährlich.</p>
+            <span class="sb-arrow">Anleitung →</span>
+          </div>
+        </a>
+
+        <a href="tel:+436502699710" class="step-bold-card red">
+          <div class="sb-photo" style="background-image: url('/cdn-img/cropped/igel-baumstamm.jpg');"></div>
+          <div class="sb-num">03</div>
+          <div class="sb-body">
+            <h3>Anrufen</h3>
+            <p><strong>0650 / 269 97 10</strong> — Gemeinsam klären wir, was zu tun ist.</p>
+            <span class="sb-arrow">📞 Jetzt anrufen</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 1.5 DIAMOND GRID – 4 Hauptaktionen ====== -->
+  <section class="diamond-section" id="diamond">
+    <!-- Nur ein paar dezente Akzent-Punkte -->
+    <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.5; pointer-events: none;" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice">
+      <circle cx="600" cy="140" r="5" fill="var(--accent-red)"/>
+      <circle cx="200" cy="180" r="4" fill="var(--sun-deep)"/>
+      <circle cx="900" cy="320" r="4" fill="var(--leaf)"/>
+    </svg>
+
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Was wir machen</span>
+        <h2>Vier Wege in die <em>Igel-Welt</em>.</h2>
+        <p>Klick rein – jede Kachel führt dich tiefer.</p>
+      </div>
+
+      <div class="diamond-grid">
+        <a class='dia-tile t-lehrpfad' href='/lehrpfad' style='background-image: url(\'/cdn-img/lehrpfad-wegweiser.jpg\');'>
+          <div class="dia-content">
+            <span class="dia-icon-tile">🌿</span>
+            <div>
+              <h3>Lehr- und Lernpfad</h3>
+              <p>12 Stationen entdecken</p>
+              <span class="dia-cta">Pfad öffnen →</span>
+            </div>
+          </div>
+        </a>
+
+        <a class='dia-tile t-wissen' href='/kinder' style='background-image: url(\'/cdn-img/cropped/igel-baby-handtuch.jpg\');'>
+          <div class="dia-content">
+            <span class="dia-icon-tile">🧩</span>
+            <div>
+              <h3>Wissen, Quiz &amp; Spiel</h3>
+              <p>Lernen mit Spaß</p>
+              <span class="dia-cta">Spielen →</span>
+            </div>
+          </div>
+        </a>
+
+        <a class='dia-tile t-mitmachen' href='/mitmachen' style='background-image: url(\'/cdn-img/cropped/bau-pause-team.jpg\');'>
+          <div class="dia-content">
+            <span class="dia-icon-tile">🤝</span>
+            <div>
+              <h3>Mitmachen</h3>
+              <p>Spenden, Patenschaft, Mithelfen</p>
+              <span class="dia-cta">Helfen →</span>
+            </div>
+          </div>
+        </a>
+
+        <a class='dia-tile t-notfall' href='/notfall' style='background-image: url(\'/cdn-img/cropped/igel-eingerollt.jpg\');'>
+          <div class="dia-content">
+            <span class="dia-icon-tile">🚨</span>
+            <div>
+              <h3>Igel-Notfall</h3>
+              <p>Soforthilfe rund um die Uhr</p>
+              <span class="dia-cta">Notruf →</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 1.5 IGEL-LIVECAM ====== -->
+  <!--
+    Live-Webcam für Igel. Eingebunden ist eine öffentliche 24/7-Igel-Webcam
+    (Futterstelle, deutschsprachiger Raum). Eine eigene Kamera lässt sich
+    einfach einbinden: einfach die YouTube-Video-ID in der iframe-src unten
+    austauschen (…/embed/EIGENE-ID?…) bzw. eine HLS-Stream-URL verwenden.
+  -->
+  <section class="igel-livecam" id="livecam">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">🔴 Live dabei</span>
+        <h2>Die <em>Igel-Livecam</em></h2>
+        <p>Schau den stacheligen Gartenbesuchern rund um die Uhr zu. Igel sind nachtaktiv – die besten Aufnahmen gibt es nach Einbruch der Dunkelheit.</p>
+      </div>
+
+      <div class="livecam-frame">
+        <span class="live-badge"><span class="live-dot"></span>LIVE</span>
+        <div class="livecam-video">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/4kRzwJXaeIM?rel=0&modestbranding=1"
+            title="Igel-Livecam – Futterstelle"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <p class="livecam-note">
+        Stream gerade offline oder kein Igel zu sehen? Igel halten von etwa November bis März Winterschlaf.
+        Weitere rund um die Uhr laufende Igel-Webcams gibt es
+        <a href="https://www.youtube.com/results?search_query=igel+webcam+live" target="_blank" rel="noopener">hier auf YouTube</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====== 2. URSULA ZUERST ====== -->
+  <section class="ursula-first playground" id="ursula">
+    <div class="blob blob-sun b1" style="opacity: 0.35;"></div>
+    <div class="blob blob-red b2" style="opacity: 0.18;"></div>
+    <div class="blob blob-leaf b4" style="opacity: 0.20;"></div>
+    <div class="dot-grid" style="opacity: 0.08;"></div>
+    <div class="doodles">
+      <span class="doodle" style="top: 12%; right: 7%; --rot: 8deg; color: var(--accent-red); opacity: 0.30;">
+        <svg width="42" height="42" viewBox="0 0 40 40" fill="currentColor">
+          <ellipse cx="20" cy="26" rx="9" ry="7"/>
+          <circle cx="11" cy="16" r="3.5"/>
+          <circle cx="29" cy="16" r="3.5"/>
+          <circle cx="6" cy="10" r="2.5"/>
+          <circle cx="34" cy="10" r="2.5"/>
+        </svg>
+      </span>
+      <span class="doodle" style="bottom: 14%; right: 12%; --rot: -10deg; color: var(--leaf); opacity: 0.30;">
+        <svg width="56" height="56" viewBox="0 0 50 50" fill="currentColor">
+          <path d="M25 5 Q 40 15 38 30 Q 30 45 15 38 Q 8 25 25 5 Z"/>
+        </svg>
+      </span>
+      <span class="doodle" style="bottom: 10%; left: 8%; --rot: 0deg; color: var(--sun-deep); opacity: 0.30;">
+        <svg width="38" height="38" viewBox="0 0 46 46" fill="currentColor">
+          <circle cx="8" cy="8" r="3"/>
+          <circle cx="22" cy="14" r="2"/>
+          <circle cx="36" cy="6" r="2.5"/>
+          <circle cx="14" cy="28" r="2"/>
+          <circle cx="32" cy="32" r="3"/>
+        </svg>
+      </span>
+    </div>
+    <div class="container">
+      <div class="ursula-grid-new">
+        <div class="ursula-photo-block">
+          <div class="frame"></div>
+          <div class="photo" role="img" aria-label="Ursula Ertl mit einem geretteten Igel"></div>
+          <div class="stamp">Seit<br><strong>10+</strong><br>Jahren<br>im Einsatz</div>
+        </div>
+
+        <div class="ursula-text">
+          <span class="ursula-eyebrow">Projektleiterin · Die Frau hinter dem Pfad</span>
+          <h1>Ursula <span class="highlight">Ertl</span></h1>
+          <p>
+            Was als private Hilfe für Igel begann, ist heute ein <strong>Lehr- und Lernpfad mit 12 Stationen</strong> in Feistritz an der Drau. Ursula päppelt verletzte und verwaiste Tiere – mit großem persönlichen und finanziellen Aufwand. Und sie klärt auf: in Schulen, auf Märkten, mit jedem Spaziergang über den Pfad.
+          </p>
+          <p class="ursula-quote-bold">
+            „Jeder Igel, der wieder freigelassen werden kann, ist ein kleines Wunder – und gleichzeitig eine Verpflichtung, weiterzumachen."
+          </p>
+          <p class="ursula-sig">— Deine Ursula 🦔</p>
+          <div class="ursula-cta">
+            <a class='btn btn-primary' href='/mitmachen'>So kannst du helfen →</a>
+            <a href="https://www.facebook.com/profile.php?id=61570800514610" target="_blank" rel="noopener" class="btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9.197 21v-9h-3v-3h3V6.5C9.197 4.567 10.764 3 12.697 3h3v3h-2c-.552 0-1 .448-1 1v2h3l-.5 3h-2.5v9z"/></svg>
+              Auf Facebook folgen
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 2.5 LEHRPFAD IM MITTELPUNKT + GOOGLE MAPS ====== -->
+  <section class="lehrpfad-spotlight" id="lehrpfad-vor-ort">
+    <div class="lps-top-bar">
+      <span class="lps-eyebrow">🌿 Der Herzstück unseres Projekts</span>
+    </div>
+    <div class="container">
+
+      <!-- Headline Block -->
+      <div class="lps-header">
+        <h2>Der <em>Lehr- und Lernpfad</em><br>— direkt bei uns vor Ort.</h2>
+        <p class="lps-lead">
+          12 Stationen mitten in Feistritz an der Drau. Jede Tafel zeigt, wie ein einziges Naturmodul den Garten zur Igelwelt macht.
+          Komm vorbei – der Pfad ist <strong>kostenlos und jederzeit zugänglich</strong>.
+        </p>
+        <div class="lps-cta-row">
+          <a class='lps-btn-primary' href='/lehrpfad'>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 12h18M13 6l6 6-6 6"/></svg>
+            Alle 12 Stationen digital entdecken
+          </a>
+          <a href="#lps-map" class="lps-btn-ghost">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Zur Karte springen
+          </a>
+        </div>
+      </div>
+
+      <!-- Fakten-Zeile -->
+      <div class="lps-facts">
+        <div class="lps-fact">
+          <strong>12</strong>
+          <span>Stationen</span>
+        </div>
+        <div class="lps-fact lps-fact-accent">
+          <strong>kostenlos</strong>
+          <span>Eintritt frei</span>
+        </div>
+        <div class="lps-fact">
+          <strong>ganzjährig</strong>
+          <span>Immer offen</span>
+        </div>
+        <div class="lps-fact">
+          <strong>alle Altersgruppen</strong>
+          <span>Familien &amp; Schulen</span>
+        </div>
+      </div>
+
+      <!-- Google Maps + Adress-Card -->
+      <div class="lps-map-wrap" id="lps-map">
+        <div class="lps-map-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2726.8!2d13.5372!3d46.6124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477591e5b0000001%3A0x1!2sSchulstra%C3%9Fe+2%2C+9710+Feistritz+an+der+Drau!5e0!3m2!1sde!2sat!4v1700000000000!5m2!1sde!2sat"
+            width="100%"
+            height="100%"
+            style="border:0; border-radius: 0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Lehr- und Lernpfad Drautal – Schulstraße 2, 9710 Feistritz an der Drau"
+          ></iframe>
+        </div>
+
+        <div class="lps-address-card">
+          <div class="lps-addr-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="lps-addr-body">
+            <h3>Anfahrt &amp; Adresse</h3>
+            <p class="lps-addr-main">
+              <strong>Schulstraße 2</strong><br>
+              9710 Feistritz an der Drau<br>
+              Kärnten, Österreich
+            </p>
+            <p class="lps-addr-hint">
+              🚗 Parkplätze direkt vor Ort<br>
+              🚶 Fußweg vom Ortszentrum: ~5 Min.<br>
+              ♿ Barrierearm zugänglich
+            </p>
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=Schulstra%C3%9Fe+2,+9710+Feistritz+an+der+Drau,+Austria"
+              target="_blank"
+              rel="noopener"
+              class="lps-directions-btn"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+              Route berechnen (Google Maps)
+            </a>
+          </div>
+
+          <div class="lps-addr-separator"></div>
+
+          <div class="lps-addr-contact">
+            <p class="lps-contact-label">Fragen? Einfach anrufen:</p>
+            <a href="tel:+436502699710" class="lps-phone-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              0650 / 269 97 10
+            </a>
+            <p class="lps-contact-name">Ursula Ertl · Projektleiterin</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <style>
+  /* ===================================================
+     LEHRPFAD SPOTLIGHT – Sektion 2.5
+     =================================================== */
+  .lehrpfad-spotlight {
+    background: var(--ink);
+    color: var(--cream-warm);
+    padding: 0 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .lehrpfad-spotlight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(245,193,60,0.10) 0, transparent 35%),
+      radial-gradient(circle at 90% 80%, rgba(74,93,46,0.15) 0, transparent 40%);
+    pointer-events: none;
+  }
+
+  /* Top-Bar */
+  .lps-top-bar {
+    background: var(--sun);
+    padding: 14px 0;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .lps-eyebrow {
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  /* Header */
+  .lps-header {
+    text-align: center;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 64px 20px 48px;
+    position: relative;
+    z-index: 2;
+  }
+  .lps-header h2 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.05;
+    color: var(--cream-warm);
+    margin: 0 0 20px;
+  }
+  .lps-header h2 em {
+    color: var(--sun);
+    font-style: italic;
+  }
+  .lps-lead {
+    font-size: 1.15rem;
+    color: rgba(253, 246, 227, 0.85);
+    line-height: 1.65;
+    margin: 0 0 32px;
+  }
+  .lps-cta-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .lps-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--sun);
+    color: var(--ink);
+    padding: 16px 32px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 2px solid var(--sun);
+    transition: all 0.2s;
+  }
+  .lps-btn-primary:hover { background: var(--sun-soft); transform: translateY(-2px); text-decoration: none; color: var(--ink); }
+  .lps-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--cream-warm);
+    padding: 16px 32px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 2px solid rgba(253,246,227,0.5);
+    transition: all 0.2s;
+  }
+  .lps-btn-ghost:hover { background: rgba(253,246,227,0.1); border-color: var(--cream-warm); text-decoration: none; color: var(--cream-warm); }
+
+  /* Fakten-Zeile */
+  .lps-facts {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 0 auto 56px;
+    max-width: 900px;
+    border: 2px solid rgba(253,246,227,0.15);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+  }
+  .lps-fact {
+    flex: 1;
+    min-width: 160px;
+    padding: 28px 20px;
+    text-align: center;
+    border-right: 1px solid rgba(253,246,227,0.12);
+  }
+  .lps-fact:last-child { border-right: none; }
+  .lps-fact.lps-fact-accent { background: rgba(245,193,60,0.12); }
+  .lps-fact strong {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: 1.9rem;
+    color: var(--sun);
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .lps-fact span {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(253,246,227,0.6);
+  }
+
+  /* Map-Wrap */
+  .lps-map-wrap {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 2px solid rgba(253,246,227,0.15);
+    min-height: 480px;
+    position: relative;
+    z-index: 2;
+  }
+  @media (max-width: 960px) {
+    .lps-map-wrap { grid-template-columns: 1fr; }
+  }
+
+  .lps-map-container {
+    min-height: 420px;
+    background: #1a1a2e;
+    position: relative;
+  }
+  .lps-map-container iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Address Card */
+  .lps-address-card {
+    background: var(--cream-warm);
+    color: var(--ink);
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .lps-addr-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--sun);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--ink);
+    margin-bottom: 18px;
+    border: 2px solid var(--ink);
+    flex-shrink: 0;
+  }
+  .lps-addr-body h3 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--ink);
+    margin: 0 0 14px;
+  }
+  .lps-addr-main {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--ink);
+    margin: 0 0 16px;
+  }
+  .lps-addr-hint {
+    font-size: 0.9rem;
+    line-height: 2;
+    color: var(--ink-soft);
+    margin: 0 0 20px;
+  }
+  .lps-directions-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ink);
+    color: var(--sun);
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    width: fit-content;
+  }
+  .lps-directions-btn:hover { background: var(--ink-soft); color: var(--sun); text-decoration: none; transform: translateY(-2px); }
+
+  .lps-addr-separator {
+    height: 1px;
+    background: rgba(43,31,18,0.1);
+    margin: 28px 0;
+  }
+
+  .lps-addr-contact { margin-top: auto; }
+  .lps-contact-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+  }
+  .lps-phone-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--accent-red);
+    text-decoration: none;
+    transition: all 0.2s;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .lps-phone-link:hover { color: var(--ink); text-decoration: none; }
+  .lps-contact-name {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin: 6px 0 0;
+    font-style: italic;
+  }
+  </style>
+
+  <!-- ====== 3. LEHRPFAD-STATIONEN ====== -->
+  <section class="lehrpfad-band playground" id="lehrpfad">
+    <div class="blob blob-sun b1" style="opacity: 0.15;"></div>
+    <div class="blob blob-red b3" style="opacity: 0.20;"></div>
+    <div class="doodles">
+      <span class="doodle" style="top: 4%; right: 8%; --rot: 12deg; color: var(--sun); opacity: 0.25;">
+        <svg width="60" height="60" viewBox="0 0 50 50" fill="currentColor">
+          <path d="M25 5 Q 40 15 38 30 Q 30 45 15 38 Q 8 25 25 5 Z"/>
+        </svg>
+      </span>
+    </div>
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Kapitel 2 · Erleben</span>
+        <h2>12 Stationen – ein Lebensraum für Igel &amp; Co.</h2>
+        <p>Jede Tafel zeigt, wie ein einzelnes Naturmodul den Garten zum Rückzugsort macht. Klick rein – und übertrag es in deinen Garten.</p>
+      </div>
+
+      <div class="station-grid">
+
+        <a class='station-card' href='/lehrpfad#station-igel-schuetzen'>
+          <div class="sc-head"><span class="sc-num">01</span><span class="sc-cat">Igel</span></div>
+          <div class="sc-body">
+            <h3>Igel schützen</h3>
+            <p class="sc-tagline">Was unsere Igel zum Überleben wirklich brauchen.</p>
+            <span class="sc-arrow">→</span>
+          </div>
+        </a>
+
+        <a class='station-card' href='/lehrpfad#station-totholz'>
+          <div class="sc-head"><span class="sc-num">02</span><span class="sc-cat">Biotop</span></div>
+          <div class="sc-body">
+            <h3>Totholz</h3>
+            <p class="sc-tagline">1.300+ Käferarten brauchen stehendes und liegendes Holz.</p>
+            <span class="sc-arrow">→</span>
+          </div>
+        </a>
+
+        <a class='station-card' href='/lehrpfad#station-totholz-kreativ'>
+          <div class="sc-head"><span class="sc-num">03</span><span class="sc-cat">Gestaltung</span></div>
+          <div class="sc-body">
+            <h3>Totholz kreativ</h3>
+            <p class="sc-tagline">4 dekorative Alternativen: Stammburg, Holzpyramide &amp; mehr.</p>
+            <span class="sc-arrow">→</span>
+          </div>
+        </a>
+
+        <a class='station-card' href='/lehrpfad#station-stumpery'>
+          <div class="sc-head"><span class="sc-num">04</span><span class="sc-cat">Biotop</span></div>
+          <div class="sc-body">
+            <h3>Wurzelgarten „Stumpery"</h3>
+            <p class="sc-tagline">Bizarre Wurzeln als Mikro-Biotop für Schatten &amp; Feuchte.</p>
+            <span class="sc-arrow">→</span>
+          </div>
+        </a>
+
+        <a class='station-card' href='/lehrpfad#station-kaeferkeller'>
+          <div class="sc-head"><span class="sc-num">05</span><span class="sc-cat">Insekten</span></div>
+          <div class="sc-body">
+            <h3>Der Käferkeller</h3>
+            <p class="sc-tagline">Mulde, Rinde, Hackschnitzel – Lebensraum für den Hirschkäfer.</p>
+            <span class="sc-arrow">→</span>
+          </div>
+        </a>
+
+        <a class='station-card' href='/lehrpfad#station-morschholzhaus'>
+          <div class="sc-head"><span class="sc-num">06</span><span class="sc-cat">Insekten</span></div>
+          <div class="sc-body">
+            <h3>Das Morschholzhaus</h3>
+            <p class="sc-tagline">Stehendes Totholz: Brutröhren für Wildbienen &amp; Hornissen.</p>
+            <span class="sc-arrow">→</span>
+          </div>
+        </a>
+
+        <a class='station-card' href='/lehrpfad#station-reisighaufen'>
+          <div class="sc-head"><span class="sc-num">07</span><span class="sc-cat">Igel</span></div>
+          <div class="sc-body">
+            <h3>Der Reisighaufen</h3>
+            <p class="sc-tagline">Igel-Quartier, Vogelschutz, Eidechsen – aus Wildheckenschnitt.</p>
+            <span class="sc-arrow">→</span>
+          </div>
+        </a>
+
+        <a class='station-card' href='/lehrpfad#station-steinpyramide'>
+          <div class="sc-head"><span class="sc-num">08</span><span class="sc-cat">Garten</span></div>
+          <div class="sc-body">
+            <h3>Die Steinpyramide</h3>
+            <p class="sc-tagline">Wärmeinsel für Reptilien – stabil und gestalterisch wertvoll.</p>
+            <span class="sc-arrow">→</span>
+          </div>
+        </a>
+
+        <a class='station-card' href='/lehrpfad#station-laub'>
+          <div class="sc-head"><span class="sc-num">09</span><span class="sc-cat">Igel</span></div>
+          <div class="sc-body">
+            <h3>Lebensraum Laub</h3>
+            <p class="sc-tagline">Herbstlaub ist Schlafplatz, Mulch und natürliche Speisekammer.</p>
+            <span class="sc-arrow">→</span>
+          </div>
+        </a>
+
+        <a class='station-card' href='/lehrpfad#station-natuerliche-zaeune'>
+          <div class="sc-head"><span class="sc-num">10</span><span class="sc-cat">Garten</span></div>
+          <div class="sc-body">
+            <h3>Natürliche Zäune</h3>
+            <p class="sc-tagline">8 Ideen statt Maschendraht – mit Igel-Durchgang 10×10 cm.</p>
+            <span class="sc-arrow">→</span>
+          </div>
+        </a>
+
+        <a class='station-card' href='/lehrpfad#station-wildstraeucher'>
+          <div class="sc-head"><span class="sc-num">11</span><span class="sc-cat">Garten</span></div>
+          <div class="sc-body">
+            <h3>Wildsträucher</h3>
+            <p class="sc-tagline">160 Vogelarten profitieren von heimischen Gehölzen.</p>
+            <span class="sc-arrow">→</span>
+          </div>
+        </a>
+
+        <a class='station-card' href='/lehrpfad#station-wir-haben-wahl'>
+          <div class="sc-head"><span class="sc-num">12</span><span class="sc-cat">Wahl</span></div>
+          <div class="sc-body">
+            <h3>Wir haben die Wahl</h3>
+            <p class="sc-tagline">Lebendige Vielfalt statt Schotterwüste und Mähroboter.</p>
+            <span class="sc-arrow">→</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="lehrpfad-cta-row">
+        <a class='btn-sun' href='/lehrpfad'>Alle Stationen im Detail entdecken →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 4. WISSENS-MOSAIC ====== -->
+  <section class="wissen-band playground">
+    <div class="blob blob-sun b2" style="opacity: 0.30;"></div>
+    <div class="blob blob-leaf b4" style="opacity: 0.20;"></div>
+    <div class="doodles">
+      <span class="doodle" style="top: 8%; left: 8%; --rot: -15deg; color: var(--accent-red);">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="currentColor">
+          <ellipse cx="20" cy="26" rx="9" ry="7"/>
+          <circle cx="11" cy="16" r="3.5"/>
+          <circle cx="29" cy="16" r="3.5"/>
+          <circle cx="6" cy="10" r="2.5"/>
+          <circle cx="34" cy="10" r="2.5"/>
+        </svg>
+      </span>
+      <span class="doodle" style="top: 20%; right: 4%; --rot: 12deg; color: var(--leaf);">
+        <svg width="50" height="50" viewBox="0 0 50 50" fill="currentColor">
+          <path d="M25 5 Q 40 15 38 30 Q 30 45 15 38 Q 8 25 25 5 Z"/>
+        </svg>
+      </span>
+      <span class="doodle" style="bottom: 12%; left: 3%; --rot: 5deg; color: var(--berry); opacity: 0.20;">
+        <svg width="36" height="36" viewBox="0 0 32 32" fill="currentColor">
+          <path d="M16 2 L 19 13 L 30 13 L 21 20 L 24 30 L 16 24 L 8 30 L 11 20 L 2 13 L 13 13 Z"/>
+        </svg>
+      </span>
+    </div>
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Wissenswert</span>
+        <h2>Den Igel verstehen lernen</h2>
+        <p>Damit du in Sekunden erkennst: Geht's dem Igel gut – oder braucht er Hilfe?</p>
+      </div>
+      <div class="wissen-mosaic">
+        <a class='wm-card big' href='/lehrpfad#station-laub'>
+          <div class="wm-img" style="background-image:url('/cdn-img/cropped/igel-eingerollt.jpg')"></div>
+          <div class="wm-overlay">
+            <span class="wm-tag">Lebensraum</span>
+            <h3>Laub &amp; Reisig</h3>
+            <p>Sein Schlafzimmer im Garten – Herbstlaub ist Mulch, Polster und Speisekammer in einem.</p>
+          </div>
+          <div class="wm-arrow">→</div>
+        </a>
+        <a class='wm-card big' href='/igel-kennenlernen#artensterben'>
+          <div class="wm-img" style="background-image:url('/cdn-img/cropped/kartenhaus-arten.jpg')"></div>
+          <div class="wm-overlay">
+            <span class="wm-tag">Warum es zählt</span>
+            <h3>Das Kartenhaus der Arten</h3>
+            <p>Jede verlorene Art kippt das System – unsere Böden und unser Klima hängen von Ökosystemen ab.</p>
+          </div>
+          <div class="wm-arrow">→</div>
+        </a>
+        <a class='wm-card std' href='/igel-kennenlernen#gesund-krank'>
+          <div class="wm-img" style="background-image:url('/cdn-img/cropped/gesund-krank-tafel.jpg')"></div>
+          <div class="wm-overlay">
+            <span class="wm-tag">Schau genau hin</span>
+            <h3>Gesund oder krank?</h3>
+            <p>13 Merkmale eines gesunden Igels.</p>
+          </div>
+          <div class="wm-arrow">→</div>
+        </a>
+        <a class='wm-card std' href='/igel-kennenlernen#baby'>
+          <div class="wm-img" style="background-image:url('/cdn-img/cropped/igel-baby-handtuch.jpg')"></div>
+          <div class="wm-overlay">
+            <span class="wm-tag">Igel-Baby</span>
+            <h3>Augen zu = Notfall</h3>
+            <p>Sofort melden.</p>
+          </div>
+          <div class="wm-arrow">→</div>
+        </a>
+        <a class='wm-card std' href='/igel-kennenlernen#geschlecht'>
+          <div class="wm-img" style="background-image:url('/cdn-img/cropped/maennchen-weibchen.jpg')"></div>
+          <div class="wm-overlay">
+            <span class="wm-tag">Bub oder Dame?</span>
+            <h3>Geschlecht erkennen</h3>
+            <p>Wichtig bei Findelkindern.</p>
+          </div>
+          <div class="wm-arrow">→</div>
+        </a>
+        <a class='wm-card std' href='/igel-kennenlernen#ernaehrung'>
+          <div class="wm-img" style="background-image:url('/cdn-img/cropped/igel-baumstamm.jpg')"></div>
+          <div class="wm-overlay">
+            <span class="wm-tag">Ernährung</span>
+            <h3>Insektenfresser</h3>
+            <p>Käfer, Raupen, Würmer.</p>
+          </div>
+          <div class="wm-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 4.3 NATURGARTEN – Wie wird dein Garten zur Igel-Insel? ====== -->
+  <section class="naturgarten-band" id="naturgarten">
+    <div class="container">
+      <div class="ng-header">
+        <span class="hs-eyebrow" style="background: var(--leaf);">🌿 Garten umgestalten</span>
+        <h2>So wird dein Garten zur <em>Igel-Insel</em>.</h2>
+        <p>
+          Ein Igel braucht keinen Wald – ein kluger Garten reicht. Mit ein paar einfachen Bausteinen schaffst du Versteck, Nahrung und sichere Wege. Hier die wichtigsten Tipps – direkt zum Umsetzen.
+        </p>
+      </div>
+
+      <!-- Hero-Bild + Big Tipps -->
+      <div class="ng-hero">
+        <div class="ng-hero-img">
+          <img src="/cdn-img/naturgarten-wintergarten.jpg" alt="Naturgarten mit Laubhaufen, Totholz und heimischen Stauden" loading="lazy">
+          <div class="ng-hero-badge">
+            <strong>Lebensraum-Komplett-Paket</strong>
+            <span>Laub · Totholz · Reisig · Wildhecke</span>
+          </div>
+        </div>
+        <div class="ng-hero-text">
+          <h3>Das <em>Geheimnis</em>: Vielfalt &amp; Unordnung</h3>
+          <p>
+            Sterile Rasenflächen, Schotter und Mähroboter sind die größten Igel-Killer. Was unsere stacheligen Freunde wirklich brauchen, ist <strong>strukturierte Wildnis</strong>: verschiedene Höhen, Ecken zum Verstecken, heimische Pflanzen für Insekten – und vor allem <strong>Durchgangsmöglichkeiten</strong> zwischen den Gärten.
+          </p>
+          <p>
+            Schon eine einzige „wilde Ecke" macht den Unterschied. Versprochen.
+          </p>
+          <div class="ng-mini-stats">
+            <div><strong>10×10</strong><span>cm Zaun-Durchgang</span></div>
+            <div><strong>2 km</strong><span>läuft ein Igel pro Nacht</span></div>
+            <div><strong>500 g</strong><span>Mindestgewicht für Winterschlaf</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 wichtigste Tipps -->
+      <div class="ng-tips-grid">
+
+        <div class="ng-tip card-1">
+          <div class="ng-tip-img" style="background-image: url('/cdn-img/naturgarten-laubhaufen.jpg');"></div>
+          <span class="ng-tip-num">01</span>
+          <h4>Laubhaufen liegen lassen</h4>
+          <p>Ein <strong>großer Laubhaufen</strong> in einer ruhigen Ecke (mind. 50×50×50 cm) wird zum Winterquartier für Igel.</p>
+          <ul>
+            <li>Schattig &amp; windgeschützt</li>
+            <li>Mit Reisig beschweren</li>
+            <li>Bis Mai stehen lassen</li>
+          </ul>
+        </div>
+
+        <div class="ng-tip card-2">
+          <div class="ng-tip-img" style="background-image: url('/cdn-img/naturgarten-laub.jpg');"></div>
+          <span class="ng-tip-num">02</span>
+          <h4>10 × 10 cm Durchgang</h4>
+          <p>Der wichtigste Tipp überhaupt: <strong>Igel müssen wandern</strong> können. Schlupflöcher schaffen!</p>
+          <ul>
+            <li>Quadratisches Loch in den Zaun</li>
+            <li>Lücke unter Gartentor</li>
+            <li>Wildhecke statt dichte Mauer</li>
+          </ul>
+        </div>
+
+        <div class="ng-tip card-3">
+          <span class="ng-tip-num">03</span>
+          <h4>Mähroboter &amp; Gift weg</h4>
+          <p>Mähroboter sind <strong>tödlich</strong> für Igel – besonders nachts. Auch Schneckenkorn ist problematisch.</p>
+          <ul>
+            <li>Roboter nur tagsüber laufen</li>
+            <li>Vor Mähen die Wiese absuchen</li>
+            <li>Kein Pestizid- &amp; Schneckengift</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Hinweis: mehr Tipps im Lehrpfad -->
+      <p style="text-align: center; margin: 24px auto 0; color: var(--ink-soft); font-style: italic; max-width: 540px;">
+        ↓ 10 weitere Tipps (Wildhecken, Wasserstelle, Totholz, Reisighaufen u.&nbsp;v.&nbsp;m.) findest du auf dem Lehrpfad.
+      </p>
+
+      <!-- CTA Box -->
+      <div class="ng-cta">
+        <div>
+          <h3>Lust auf mehr Tipps &amp; konkrete Baupläne?</h3>
+          <p>Auf unserem Lehr- und Lernpfad zeigen wir an 12 Stationen, wie es im Detail geht.</p>
+        </div>
+        <a class='hs-btn-red' href='/lehrpfad'>Zum Lehr- und Lernpfad →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 4.5 SPIEL & QUIZ DIREKT (Wissens-Bausteine) ====== -->
+  <section class="wq-section">
+    <div class="wq-bg-blob"></div>
+    <div class="container">
+      <div class="section-header">
+        <span class="hs-eyebrow" style="background: var(--leaf);">🎮 Mach mit – direkt hier</span>
+        <h2 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.6rem); margin: 18px 0 12px;">
+          Wissen, <em>Quiz &amp; Spiel</em>.
+        </h2>
+        <p>Spiel mit, lern mit – ohne irgendwo hinzuklicken.</p>
+      </div>
+
+      <div class="wq-grid">
+
+        <!-- Mini-Quiz LIVE -->
+        <div class="wq-quiz">
+          <div class="wq-quiz-header">
+            <span class="wq-tag">🧠 Quiz</span>
+            <span class="wq-counter" id="wqCounter">Frage 1 von 4</span>
+          </div>
+          <div class="wq-progress"><div class="wq-progress-bar" id="wqBar"></div></div>
+          <h3 class="wq-q" id="wqQuestion"></h3>
+          <div class="wq-answers" id="wqAnswers"></div>
+          <div class="wq-feedback" id="wqFeedback"></div>
+        </div>
+
+        <!-- Fun Facts Karussell -->
+        <div class="wq-facts">
+          <div class="wq-quiz-header">
+            <span class="wq-tag" style="background: var(--accent-red); color: var(--cream-warm);">✨ Wusstest du …</span>
+          </div>
+          <div class="wq-fact" id="wqFact">
+            <div class="wq-fact-num" id="wqFactNum"></div>
+            <div class="wq-fact-lbl" id="wqFactLbl"></div>
+            <p class="wq-fact-text" id="wqFactText"></p>
+          </div>
+          <div class="wq-fact-nav">
+            <button onclick="wqFactPrev()" type="button" aria-label="Vorheriger Fakt">‹</button>
+            <div class="wq-fact-dots" id="wqFactDots"></div>
+            <button onclick="wqFactNext()" type="button" aria-label="Nächster Fakt">›</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align: center; margin-top: 48px;">
+        <a class='hs-btn-red' href='/kinder' style='background: var(--ink); color: var(--sun);'>Mehr Spiele &amp; Rätsel →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 6. ENTSTEHUNG – Polaroid-Wand ====== -->
+  <section class="entstehung-bold">
+    <div class="container">
+      <div class="entst-header">
+        <span class="hs-eyebrow" style="background: var(--sun); color: var(--ink);">📸 Live dabei</span>
+        <h2>So entsteht unser<br><em>Lehr- und Lernpfad</em> — gerade jetzt.</h2>
+        <p>Viele Helferinnen und Helfer bauen mit uns Station für Station auf. Aus Wiese, Wurzeln und Stein wird ein lebender Lernort.</p>
+      </div>
+
+      <div class="polaroid-wall">
+        <div class="pw-item r1" style="--bg: url('/cdn-img/cropped/bau-kraeuterspirale-team.jpg');">
+          <span>Kräuterspirale</span>
+        </div>
+        <div class="pw-item r-l" style="--bg: url('/cdn-img/cropped/bau-steinpyramide-team2.jpg');">
+          <span>Daumen hoch! ✊</span>
+        </div>
+        <div class="pw-item r2" style="--bg: url('/cdn-img/cropped/bau-kraeuterspirale-fertig.jpg');">
+          <span>Spirale fertig</span>
+        </div>
+        <div class="pw-item r-r" style="--bg: url('/cdn-img/cropped/bau-insektenhotel2.jpg');">
+          <span>Insektenhotel</span>
+        </div>
+        <div class="pw-item r1" style="--bg: url('/cdn-img/cropped/bau-reisig-kinder.jpg');">
+          <span>Kids dabei</span>
+        </div>
+        <div class="pw-item r-l" style="--bg: url('/cdn-img/cropped/bau-strauch-pflanzen.jpg');">
+          <span>Strauch setzen</span>
+        </div>
+        <div class="pw-item r2" style="--bg: url('/cdn-img/cropped/bau-pause-team.jpg');">
+          <span>Verdiente Pause</span>
+        </div>
+        <div class="pw-item r-r" style="--bg: url('/cdn-img/cropped/bau-traktor.jpg');">
+          <span>Materialtransport</span>
+        </div>
+      </div>
+
+      <div class="entst-quote-block">
+        <p class="quote-text">
+          „Es ist unfassbar, wie viele Menschen mit anpacken – jung und alt. Aus jeder Wurzel, jedem Stein wird hier ein <em>Versprechen an die Natur.</em>"
+        </p>
+        <div class="quote-cta-row">
+          <a class='hs-btn-red' href='/mitmachen'>Mithelfen &amp; Termine →</a>
+          <a class='hs-btn-ghost' href='/lehrpfad' style='color: var(--cream-warm); border-color: var(--cream-warm);'>Lehrpfad ansehen →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 7. KAMPAGNE (Split mit Stat-Tiles) ====== -->
+  <section class="kampagne-bold">
+    <div class="container">
+      <div class="kampagne-grid">
+        <div class="kamp-text">
+          <span class="hs-eyebrow" style="background: var(--cream-warm); color: var(--accent-red);">🦔 Unsere Aufklärungs-Kampagne</span>
+          <h2>„Dein Zaun braucht <span class="kamp-mark">ein Loch</span>.<br>Igel brauchen Durchgänge."</h2>
+          <p>Igel legen pro Nacht bis zu <strong>2 km</strong> zurück. Gärten mit dichten Zäunen werden zur Falle. Ein Durchgang von nur <strong>10 × 10 cm</strong> reicht — und rettet Leben.</p>
+          <div class="hs-cta-row" style="margin-top: 28px;">
+            <a class='hs-btn-red' href='/igel-kennenlernen' style='background: var(--ink); color: var(--sun); box-shadow: 0 8px 22px rgba(43,31,18,0.25);'>Mehr zur Kampagne →</a>
+          </div>
+          <p style="margin-top:24px; font-family:'Caveat', cursive; font-size:1.5rem; color: var(--ink);">— Ursula Ertl, Projektleiterin</p>
+        </div>
+
+        <div class="kamp-stats">
+          <div class="ks-tile big">
+            <strong>2&nbsp;km</strong>
+            <span>läuft ein Igel pro Nacht</span>
+          </div>
+          <div class="ks-tile">
+            <strong>10×10</strong>
+            <span>cm Durchgang reicht</span>
+          </div>
+          <div class="ks-tile alt">
+            <strong>12</strong>
+            <span>Lehrpfad-Stationen</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ====== 9. DANKE (kompakt) ====== -->
+  <section class="danke bg-watermark" style="--wm: url('/cdn-img/cropped/igel-baby-handtuch.jpg'); --wm-pos: right -100px center; --wm-size: 400px auto; --wm-opacity: 0.06;">
+    <div class="container">
+      <div class="danke-inner">
+        <div class="danke-photo">
+          <img src="/cdn-img/cropped/clemens-igelpforte.jpg" alt="Clemens designt die Igelpforte" loading="lazy">
+        </div>
+        <div>
+          <h3>Danke <span class="heart">♥</span></h3>
+          <p>
+            An <strong>Clemens und Tom</strong> – meine Söhne, die fürs Designen der Igelpforte und das Mittragen alles geben, jeder auf seine Art.
+          </p>
+          <p>
+            An <strong>meinen Mann</strong> – ohne dein Engagement gäbe es diese Mission nicht.
+          </p>
+          <p class="sig">— Ursula</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 10. EMERGENCY-CTA ====== -->
+  <section class="compact" style="padding: 56px 0 80px;">
+    <div class="container">
+      <div class="emergency-cta">
+        <span style="font-size:2.4rem; position: relative; z-index: 2;">🦔</span>
+        <h2 style="position: relative; z-index: 2;">Im Zweifel: lieber anrufen.</h2>
+        <p style="position: relative; z-index: 2;">Du hast einen Igel gefunden, bist dir aber unsicher, ob er Hilfe braucht? Völlig normal. Ruf einfach an – wir klären es gemeinsam.</p>
+        <a href="tel:+436502699710" class="phone-big" style="position: relative; z-index: 2;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          0650 / 269 97 10
+        </a>
+        <p style="margin-top:24px; font-family:'Caveat', cursive; font-size:1.6rem; position: relative; z-index: 2;">— Ursula Ertl · Projektleiterin</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="assets/partials.js"></script>
+<script>
+// =====================================================
+// HOMEPAGE QUIZ + FACTS + MEMORY (eingebettet)
+// =====================================================
+
+// --- Mini-Quiz (4 Fragen) ---
+const WQ_QUIZ = [
+  { q: "Wie viele Stacheln hat ein Igel?", a: ["Etwa 500", "Etwa 8.000", "Etwa 80.000"], correct: 1 },
+  { q: "Was darfst du einem Igel NIEMALS geben?", a: ["Wasser", "Milch", "Insekten"], correct: 1 },
+  { q: "Wie groß muss ein Igel-Durchgang im Zaun sein?", a: ["5 × 5 cm", "10 × 10 cm", "30 × 30 cm"], correct: 1 },
+  { q: "Wann ist ein gesunder Igel aktiv?", a: ["Vormittags", "Mittags", "Nachts & Dämmerung"], correct: 2 },
+];
+let wqIdx = 0, wqScore = 0;
+
+function wqRender() {
+  const c = document.getElementById('wqCounter');
+  const bar = document.getElementById('wqBar');
+  const q = document.getElementById('wqQuestion');
+  const a = document.getElementById('wqAnswers');
+  const f = document.getElementById('wqFeedback');
+  if (!c) return;
+
+  if (wqIdx >= WQ_QUIZ.length) {
+    bar.style.width = '100%';
+    c.textContent = 'Fertig!';
+    q.innerHTML = `Du hast <strong>${wqScore} von ${WQ_QUIZ.length}</strong> richtig!`;
+    a.innerHTML = `<button type="button" onclick="wqRestart()">Nochmal spielen →</button>`;
+    f.innerHTML = wqScore === WQ_QUIZ.length ? '🏆 Igel-Profi!' : wqScore >= 3 ? '👍 Sehr gut!' : '🤔 Übung macht den Meister!';
+    return;
+  }
+
+  c.textContent = `Frage ${wqIdx + 1} von ${WQ_QUIZ.length}`;
+  bar.style.width = ((wqIdx) / WQ_QUIZ.length * 100) + '%';
+  const item = WQ_QUIZ[wqIdx];
+  q.textContent = item.q;
+  a.innerHTML = item.a.map((ans, i) =>
+    `<button type="button" onclick="wqAnswer(${i})">${ans}</button>`
+  ).join('');
+  f.textContent = '';
+}
+
+function wqAnswer(i) {
+  const item = WQ_QUIZ[wqIdx];
+  const buttons = document.querySelectorAll('#wqAnswers button');
+  buttons.forEach(b => b.disabled = true);
+  if (i === item.correct) {
+    buttons[i].classList.add('correct');
+    wqScore++;
+    document.getElementById('wqFeedback').textContent = '🎉 Richtig!';
+  } else {
+    buttons[i].classList.add('wrong');
+    buttons[item.correct].classList.add('correct');
+    document.getElementById('wqFeedback').textContent = '🙈 Knapp daneben';
+  }
+  setTimeout(() => { wqIdx++; wqRender(); }, 1300);
+}
+
+function wqRestart() { wqIdx = 0; wqScore = 0; wqRender(); }
+wqRender();
+
+// --- Fun-Facts-Karussell ---
+const WQ_FACTS = [
+  { num: "8.000", lbl: "Stacheln", text: "Ein erwachsener Igel hat zwischen 6.000 und 8.000 Stacheln. Jeder einzelne wird ca. 18 Monate alt." },
+  { num: "2 km", lbl: "pro Nacht", text: "Ein Igel kann in einer Nacht bis zu 2 Kilometer wandern – auf der Suche nach Käfern, Würmern und Insekten." },
+  { num: "5 °C", lbl: "Winterschlaf", text: "Im Winterschlaf sinkt seine Körpertemperatur auf 5 °C. Sein Herz schlägt nur noch 8 Mal pro Minute." },
+  { num: "1.300+", lbl: "Käferarten", text: "Über 1.300 verschiedene Käferarten brauchen Totholz – und der Igel liebt sie alle als Snack." },
+  { num: "10×10", lbl: "cm Durchgang", text: "Ein Igel-Durchgang im Zaun von nur 10 × 10 cm reicht, damit Igel zwischen Gärten wandern können." },
+];
+let wqFactIdx = 0;
+function wqFactRender() {
+  const f = WQ_FACTS[wqFactIdx];
+  document.getElementById('wqFactNum').textContent = f.num;
+  document.getElementById('wqFactLbl').textContent = f.lbl;
+  document.getElementById('wqFactText').textContent = f.text;
+  document.getElementById('wqFactDots').innerHTML = WQ_FACTS.map((_, i) =>
+    `<span class="${i === wqFactIdx ? 'active' : ''}"></span>`
+  ).join('');
+}
+function wqFactNext() { wqFactIdx = (wqFactIdx + 1) % WQ_FACTS.length; wqFactRender(); }
+function wqFactPrev() { wqFactIdx = (wqFactIdx - 1 + WQ_FACTS.length) % WQ_FACTS.length; wqFactRender(); }
+wqFactRender();
+// Auto-Rotation alle 6 Sekunden
+setInterval(() => wqFactNext(), 6000);
+
+// --- Memory mini (4×3 = 12 Karten, 6 Paare) ---
+const WQ_MEM = ['🦔', '🍂', '🪲', '🌿', '🍄', '🐛'];
+let wqMemFlipped = [], wqMemLock = false;
+function wqMemoryInit() {
+  const grid = document.getElementById('wqMemoryGrid');
+  if (!grid) return; // Memory ist auf dieser Seite nicht vorhanden
+  const cards = [...WQ_MEM, ...WQ_MEM].sort(() => Math.random() - 0.5);
+  grid.innerHTML = cards.map((c) =>
+    `<div class="wq-memory-card" data-emoji="${c}" onclick="wqMemFlip(this)"></div>`
+  ).join('');
+  const hint = document.getElementById('wqMemoryHint');
+  if (hint) hint.textContent = 'Finde die Paare!';
+  wqMemFlipped = [];
+  wqMemLock = false;
+}
+function wqMemFlip(el) {
+  if (wqMemLock || el.classList.contains('matched') || el.classList.contains('flipped')) return;
+  el.classList.add('flipped');
+  el.textContent = el.dataset.emoji;
+  wqMemFlipped.push(el);
+  if (wqMemFlipped.length === 2) {
+    wqMemLock = true;
+    if (wqMemFlipped[0].dataset.emoji === wqMemFlipped[1].dataset.emoji) {
+      setTimeout(() => {
+        wqMemFlipped.forEach(c => c.classList.add('matched'));
+        wqMemFlipped = [];
+        wqMemLock = false;
+        const matched = document.querySelectorAll('.wq-memory-card.matched').length;
+        if (matched === WQ_MEM.length * 2) {
+          const hint = document.getElementById('wqMemoryHint');
+          if (hint) hint.textContent = '🏆 Geschafft!';
+        }
+      }, 400);
+    } else {
+      setTimeout(() => {
+        wqMemFlipped.forEach(c => { c.classList.remove('flipped'); c.textContent = ''; });
+        wqMemFlipped = [];
+        wqMemLock = false;
+      }, 900);
+    }
+  }
+}
+wqMemoryInit();
+</script>
+</body>
+</html>

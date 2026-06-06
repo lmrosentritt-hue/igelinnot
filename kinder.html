@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinder-Ecke · SOS Igel in Not</title>
+<link rel="stylesheet" href="styles/main.css">
+<style>
+/* Verspielt bunt */
+.fact-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 900px) { .fact-row { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .fact-row { grid-template-columns: 1fr; } }
+
+.fact-sticker {
+  border-radius: 22px;
+  padding: 22px 20px;
+  border: 2.5px solid var(--ink);
+  transition: all 0.25s;
+  text-align: center;
+  position: relative;
+  cursor: default;
+}
+.fact-sticker:hover { transform: rotate(-2deg) scale(1.04); }
+.fact-sticker:nth-child(4n+1) { background: var(--sun); transform: rotate(-1.5deg); }
+.fact-sticker:nth-child(4n+2) { background: #F4B0C0; transform: rotate(1.5deg); }
+.fact-sticker:nth-child(4n+3) { background: #B7D49C; transform: rotate(-0.5deg); }
+.fact-sticker:nth-child(4n+4) { background: #C8DEF4; transform: rotate(1deg); }
+.fact-sticker .big {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 2.4rem;
+  line-height: 1;
+  display: block;
+  color: var(--ink);
+}
+.fact-sticker .lbl {
+  font-weight: 700;
+  margin-top: 8px;
+  display: block;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+/* Quiz */
+.quiz-box {
+  background: var(--cream-warm);
+  border: 3px solid var(--ink);
+  border-radius: 24px;
+  padding: 36px;
+  max-width: 740px;
+  margin: 0 auto;
+  position: relative;
+}
+.quiz-progress {
+  height: 12px;
+  background: var(--sun-bg);
+  border-radius: 999px;
+  border: 1.5px solid var(--ink);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.quiz-progress-bar {
+  background: var(--sun);
+  height: 100%;
+  width: 0%;
+  transition: width 0.4s;
+}
+.quiz-q {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.6rem;
+  margin: 0 0 20px;
+  color: var(--ink);
+  text-align: center;
+}
+.quiz-answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 560px) { .quiz-answers { grid-template-columns: 1fr; } }
+.quiz-answers button {
+  background: var(--cream-warm);
+  border: 2px solid var(--ink);
+  padding: 16px 20px;
+  border-radius: 14px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+.quiz-answers button:hover { background: var(--sun); transform: translateY(-2px); }
+.quiz-answers button.correct { background: var(--leaf); color: var(--cream-warm); border-color: var(--leaf); }
+.quiz-answers button.wrong { background: var(--accent-red); color: var(--cream-warm); border-color: var(--accent-red); }
+.quiz-feedback {
+  margin-top: 18px;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+}
+.quiz-finish {
+  text-align: center;
+}
+.quiz-finish .score {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--accent-red);
+  display: block;
+}
+
+/* Memory */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.memory-card {
+  aspect-ratio: 1;
+  background: var(--sun);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 2.4rem;
+  color: var(--sun);
+  transition: all 0.2s;
+}
+.memory-card.flipped { background: var(--cream-warm); color: var(--ink); }
+.memory-card.matched { background: var(--leaf); color: var(--cream-warm); cursor: default; opacity: 0.7; }
+
+/* Spiele-Auswahl */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 900px) { .games-grid { grid-template-columns: 1fr; } }
+.game-card {
+  background: var(--cream-warm);
+  border: 2.5px solid var(--ink);
+  border-radius: 22px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: all 0.2s;
+}
+.game-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(43,31,18,0.18); }
+.game-card .emoji { font-size: 3rem; display: block; margin-bottom: 10px; }
+.game-card h3 { font-family: 'Fraunces', serif; font-style: italic; margin: 0 0 8px; color: var(--ink); }
+.game-card p { color: var(--ink-soft); font-size: 0.95rem; margin: 0 0 16px; }
+</style>
+</head>
+<body data-page="kinder">
+
+<main>
+  <!-- HERO -->
+  <section class="page-hero-bold bg-sun">
+    <span class="float-emoji tl">🎨</span>
+    <span class="float-emoji tr">🧩</span>
+    <span class="float-emoji bl">🎮</span>
+    <span class="float-emoji br">🦔</span>
+    <div class="container">
+      <span class="eyebrow">Kapitel 5 · Mitmachen</span>
+      <h1>Die <em>Kinder-Ecke</em>.</h1>
+      <p class="lead">Quiz, Memory und coole Igel-Fakten – werde zum echten Igel-Profi!</p>
+    </div>
+  </section>
+
+  <!-- FUN FACTS -->
+  <section class="bg-cream">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Krasse Igel-Fakten</span>
+        <h2>Wusstest du, dass …</h2>
+      </div>
+      <div class="fact-row">
+        <div class="fact-sticker"><span class="big">8.000</span><span class="lbl">Stacheln hat ein Igel</span></div>
+        <div class="fact-sticker"><span class="big">2 km</span><span class="lbl">läuft er pro Nacht</span></div>
+        <div class="fact-sticker"><span class="big">5 °C</span><span class="lbl">im Winterschlaf</span></div>
+        <div class="fact-sticker"><span class="big">8/min</span><span class="lbl">Herzschlag im Winter</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="bg-sun-bg">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Spiel 1</span>
+        <h2>Das große <em>Igel-Quiz</em></h2>
+        <p>6 Fragen – schaffst du die volle Punktzahl?</p>
+      </div>
+
+      <div class="quiz-box" id="quizBox">
+        <div class="quiz-progress"><div class="quiz-progress-bar" id="progressBar"></div></div>
+        <div id="quizContent"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEITERE SPIELE -->
+  <section class="bg-ink">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Noch mehr Spaß</span>
+        <h2>Weitere Spiele</h2>
+      </div>
+      <div class="games-grid">
+        <div class="game-card">
+          <span class="emoji">🃏</span>
+          <h3>Igel-Memory</h3>
+          <p>Finde die passenden Paare aus der Igel-Welt.</p>
+          <button class="btn btn-primary" onclick="document.getElementById('memory').scrollIntoView({behavior:'smooth'})" type="button">Spielen →</button>
+        </div>
+        <div class="game-card">
+          <span class="emoji">🎨</span>
+          <h3>Igel malen</h3>
+          <p>Druck dir einen Igel zum Ausmalen aus!</p>
+          <button class="btn btn-primary" onclick="alert('Demo: Druckvorlage öffnen')" type="button">Drucken →</button>
+        </div>
+        <div class="game-card">
+          <span class="emoji">🪣</span>
+          <h3>Fang-Spiel</h3>
+          <p>Fang was gut ist für den Igel – weiche schlechten Dingen aus!</p>
+          <button class="btn btn-primary" onclick="document.getElementById('bubbles-game-section').scrollIntoView({behavior:'smooth'})" type="button">Spielen →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMORY -->
+  <section class="bg-cream" id="memory">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Spiel 2</span>
+        <h2>Igel-Memory</h2>
+        <p>Klick zwei Karten an und finde gleiche Paare!</p>
+      </div>
+      <div class="memory-grid" id="memoryGrid"></div>
+      <div style="text-align: center; margin-top: 24px;">
+        <button class="btn btn-secondary" onclick="initMemory()" type="button">Neu mischen</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FANG-SPIEL – Igel-Korb
+       ═══════════════════════════════════════════ -->
+  <section id="bubbles-game-section" style="padding: 72px 0 80px; background: linear-gradient(180deg, #e8f5e9 0%, var(--cream-warm) 100%);">
+    <div class="container" style="max-width: 860px; margin: 0 auto; padding: 0 20px;">
+      <!-- Heading -->
+      <div style="text-align: center; margin-bottom: 32px;">
+        <span style="display: inline-block; background: var(--sun); color: var(--ink); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 16px; border-radius: 999px; margin-bottom: 12px;">🕹️ Spiel 3 – Fang-Spiel</span>
+        <h2 style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(1.7rem, 4vw, 2.4rem); color: var(--ink); margin: 0 0 12px;">Fang das Igel-Futter!</h2>
+        <p style="color: var(--ink-soft); max-width: 560px; margin: 0 auto; font-size: 1rem; line-height: 1.5;">
+          Dinge fallen von oben. Bewege den Korb mit der <strong>Maus</strong> oder dem <strong>Finger</strong>.
+          <strong style="color:#2e7d32;">Grüne Dinge</strong> fangen = Punkte! <strong style="color:#c62828;">Rote Dinge</strong> fangen = Leben verloren!
+        </p>
+      </div>
+
+      <!-- Scoreboard -->
+      <div id="bbl-scoreboard" style="display: flex; justify-content: center; gap: 24px; margin-bottom: 20px; flex-wrap: wrap;">
+        <div style="background: #fff; border-radius: 16px; padding: 12px 28px; box-shadow: 0 4px 14px rgba(43,31,18,0.10); text-align: center; min-width: 110px;">
+          <div style="font-size: 1.6rem; font-weight: 900; color: #2e7d32;" id="bbl-score">0</div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em;">Punkte</div>
+        </div>
+        <div style="background: #fff; border-radius: 16px; padding: 12px 28px; box-shadow: 0 4px 14px rgba(43,31,18,0.10); text-align: center; min-width: 110px;">
+          <div style="font-size: 1.6rem; font-weight: 900; color: #c62828;" id="bbl-lives">🦔🦔🦔</div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em;">Igel-Leben</div>
+        </div>
+        <div style="background: #fff; border-radius: 16px; padding: 12px 28px; box-shadow: 0 4px 14px rgba(43,31,18,0.10); text-align: center; min-width: 110px;">
+          <div style="font-size: 1.6rem; font-weight: 900; color: var(--ink);" id="bbl-level">1</div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em;">Level</div>
+        </div>
+      </div>
+
+      <!-- Game Arena -->
+      <div id="bbl-arena" style="
+        position: relative;
+        width: 100%;
+        max-width: 760px;
+        height: 460px;
+        margin: 0 auto 20px;
+        background: linear-gradient(175deg, #b3e5fc 0%, #e8f5e9 60%, #f1f8e9 100%);
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow: 0 12px 36px rgba(43,31,18,0.15);
+        border: 3px solid rgba(255,255,255,0.7);
+        cursor: pointer;
+        user-select: none;
+      ">
+        <!-- Decorative ground / Wiese -->
+        <div style="position:absolute; bottom:0; left:0; right:0; height:56px; background: linear-gradient(0deg, #81c784 0%, #a5d6a7 60%, transparent 100%); border-radius: 0 0 26px 26px;"></div>
+        <!-- Bäumchen links -->
+        <div style="position:absolute; bottom:44px; left:18px; font-size:2.4rem; pointer-events:none; opacity:0.7;">🌳</div>
+        <!-- Bäumchen rechts -->
+        <div style="position:absolute; bottom:44px; right:18px; font-size:2rem; pointer-events:none; opacity:0.65;">🌲</div>
+        <!-- Sonne -->
+        <div style="position:absolute; top:12px; right:20px; width:50px; height:50px; background: radial-gradient(circle, #ffe082 60%, transparent 100%); border-radius:50%; opacity:0.75;"></div>
+        <!-- Wolken -->
+        <div style="position:absolute; top:18px; left:24px; font-size:1.6rem; pointer-events:none; opacity:0.6;">☁️</div>
+        <div style="position:absolute; top:10px; left:110px; font-size:1.1rem; pointer-events:none; opacity:0.45;">☁️</div>
+
+        <!-- KORB (Fänger) -->
+        <div id="bbl-basket" style="
+          position: absolute;
+          bottom: 10px;
+          left: 0;
+          width: 88px;
+          height: 52px;
+          pointer-events: none;
+          z-index: 8;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-end;
+          transition: left 0.04s linear;
+        ">
+          <!-- Korb-Grafik aus CSS -->
+          <div style="
+            width: 84px; height: 44px;
+            background: linear-gradient(180deg, #8B5E3C 0%, #6B3F1F 100%);
+            border-radius: 0 0 28px 28px;
+            border: 3px solid #4a2810;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(43,31,18,0.35);
+            overflow: hidden;
+          ">
+            <!-- Flechtmuster -->
+            <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 10px,rgba(255,255,255,0.06) 10px,rgba(255,255,255,0.06) 11px),repeating-linear-gradient(0deg,transparent,transparent 8px,rgba(0,0,0,0.08) 8px,rgba(0,0,0,0.08) 9px);"></div>
+            <!-- Igel-Emoji im Korb -->
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🦔</div>
+          </div>
+          <!-- Griff -->
+          <div style="
+            width: 56px; height: 10px;
+            border: 3px solid #4a2810;
+            border-bottom: none;
+            border-radius: 14px 14px 0 0;
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            background: transparent;
+          "></div>
+        </div>
+
+        <!-- Idle screen -->
+        <div id="bbl-idle" style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:10; background: rgba(253,246,227,0.82); backdrop-filter: blur(3px); border-radius: 26px;">
+          <div style="font-size: 3.5rem; margin-bottom: 10px;">🦔</div>
+          <div style="font-family:'Fraunces',serif; font-style:italic; font-size: 1.4rem; color: var(--ink); margin-bottom: 6px;">Bereit zum Fangen?</div>
+          <div style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 20px; max-width: 240px; text-align:center; line-height:1.4;">Bewege die Maus oder den Finger – fang alles Grüne!</div>
+          <button id="bbl-start-btn" style="background: var(--sun); color: var(--ink); font-size: 1.1rem; font-weight: 800; padding: 14px 40px; border: none; border-radius: 999px; cursor: pointer; box-shadow: 0 6px 18px rgba(245,193,60,0.4); transition: transform 0.15s;">Los geht's! 🦔</button>
+        </div>
+        <!-- Game Over screen -->
+        <div id="bbl-gameover" style="position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; background: rgba(43,31,18,0.75); z-index:20; border-radius: 26px;">
+          <div style="font-size: 3.5rem; margin-bottom: 8px;">😢</div>
+          <div style="font-family:'Fraunces',serif; font-style:italic; font-size: 1.8rem; color: #fff; margin-bottom: 6px;">Spiel vorbei!</div>
+          <div style="color: #ffe082; font-size: 1.1rem; font-weight: 700; margin-bottom: 20px;">Dein Ergebnis: <span id="bbl-final-score">0</span> Punkte</div>
+          <button id="bbl-restart-btn" style="background: var(--sun); color: var(--ink); font-size: 1rem; font-weight: 800; padding: 12px 36px; border: none; border-radius: 999px; cursor: pointer; box-shadow: 0 6px 18px rgba(245,193,60,0.45);">Nochmal spielen 🔄</button>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 14px;">
+        <div style="display:flex; align-items:center; gap: 10px; background:#fff; border-radius:12px; padding: 10px 20px; box-shadow: 0 2px 8px rgba(43,31,18,0.08);">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(76,175,80,0.85);flex-shrink:0;"></div>
+          <div>
+            <div style="font-weight:800; font-size:0.85rem; color:#2e7d32;">🟢 Gut = Fangen! +1 Punkt</div>
+            <div style="font-size:0.75rem; color:var(--ink-soft);">Regenwurm, Wasser, Laub …</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap: 10px; background:#fff; border-radius:12px; padding: 10px 20px; box-shadow: 0 2px 8px rgba(43,31,18,0.08);">
+          <div style="width:18px;height:18px;border-radius:50%;background:rgba(244,67,54,0.85);flex-shrink:0;"></div>
+          <div>
+            <div style="font-weight:800; font-size:0.85rem; color:#c62828;">🔴 Schlecht = Ausweichen!</div>
+            <div style="font-size:0.75rem; color:var(--ink-soft);">Milch, Mähroboter, Pestizid …</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap: 10px; background:#fff; border-radius:12px; padding: 10px 20px; box-shadow: 0 2px 8px rgba(43,31,18,0.08);">
+          <div style="font-size:1.1rem;">🖱️📱</div>
+          <div>
+            <div style="font-weight:800; font-size:0.85rem; color:var(--ink);">Steuerung</div>
+            <div style="font-size:0.75rem; color:var(--ink-soft);">Maus bewegen oder Finger ziehen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-sun">
+    <div class="container text-center">
+      <h2 style="font-family: 'Fraunces', serif; font-style: italic;">Magst du Igel jetzt noch mehr?</h2>
+      <p style="max-width: 560px; margin: 0 auto 24px; color: var(--ink-soft);">Dann komm mit deinen Eltern oder Schulklasse zum Lehrpfad!</p>
+      <a class='btn' href='/lehrpfad' style='background: var(--ink); color: var(--sun); font-weight: 800;'>Zum Lehrpfad →</a>
+    </div>
+  </section>
+</main>
+
+<script src="assets/partials.js"></script>
+<script>
+/* ════════════════════════════════════════════════════════════
+   FANG-SPIEL – Dinge fallen von oben, Korb fängt sie
+   ════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  /* ── Daten ── */
+  const GOOD_ITEMS = [
+    { emoji: '🪱', name: 'Regenwurm',  tip: 'Lieblingsfutter des Igels!' },
+    { emoji: '💧', name: 'Wasser',      tip: 'Frisches Wasser täglich hinstellen!' },
+    { emoji: '🍂', name: 'Laub',        tip: 'Perfektes Winterquartier!' },
+    { emoji: '🪵', name: 'Totholz',     tip: 'Insektenwohnung = Igel-Menü!' },
+    { emoji: '🦟', name: 'Insekten',    tip: 'Hauptmahlzeit des Igels!' },
+    { emoji: '🐌', name: 'Schnecke',    tip: 'Leckerbissen für den Igel!' },
+    { emoji: '🌿', name: 'Wildblumen',  tip: 'Locken viele Insekten an!' },
+    { emoji: '🏠', name: 'Igel-Haus',   tip: 'Sicherer Unterschlupf!' },
+    { emoji: '🍎', name: 'Fallobst',    tip: 'Lockt Insekten – gut für Igel!' },
+  ];
+  const BAD_ITEMS = [
+    { emoji: '🥛', name: 'Milch',       tip: 'Schadet dem Magen!' },
+    { emoji: '🤖', name: 'Mähroboter',  tip: 'Lebensgefahr für Igel!' },
+    { emoji: '☠️', name: 'Pestizid',    tip: 'Tötet Nahrung & Igel!' },
+    { emoji: '🧂', name: 'Salz',        tip: 'Giftig für Igel!' },
+    { emoji: '🧼', name: 'Seife',       tip: 'Reizt Haut & Augen!' },
+    { emoji: '🪤', name: 'Falle',       tip: 'Gefängnis für Igel!' },
+    { emoji: '🍞', name: 'Brot',        tip: 'Schimmel schadet Igeln!' },
+  ];
+
+  /* ── State ── */
+  let gameScore = 0, lives = 3, level = 1, running = false;
+  let items = [], animId = null, spawnTimer = null;
+  let dropSpeed = 1.8, spawnInterval = 1600;
+  let basketX = 0;          // centre-x des Korbs in px
+  let arenaW = 760, arenaH = 460;
+  const BASKET_W = 88;       // Breite Korb
+  const BASKET_H = 52;       // Höhe Korb
+  const ITEM_SIZE = 72;      // fallende Objekte
+
+  /* ── DOM Refs ── */
+  let arena, basket, scoreEl, livesEl, levelEl, idleEl, gameoverEl, finalScoreEl;
+
+  function initRefs() {
+    arena        = document.getElementById('bbl-arena');
+    basket       = document.getElementById('bbl-basket');
+    scoreEl      = document.getElementById('bbl-score');
+    livesEl      = document.getElementById('bbl-lives');
+    levelEl      = document.getElementById('bbl-level');
+    idleEl       = document.getElementById('bbl-idle');
+    gameoverEl   = document.getElementById('bbl-gameover');
+    finalScoreEl = document.getElementById('bbl-final-score');
+  }
+
+  /* ── Korb bewegen ── */
+  function moveBasket(clientX) {
+    if (!arena || !basket) return;
+    const rect = arena.getBoundingClientRect();
+    let x = clientX - rect.left;
+    x = Math.max(BASKET_W / 2, Math.min(arenaW - BASKET_W / 2, x));
+    basketX = x;
+    basket.style.left = (x - BASKET_W / 2) + 'px';
+  }
+
+  /* ── Item-Objekte erzeugen ── */
+  function spawnItem() {
+    if (!arena) return;
+    const isGood = Math.random() < 0.55;
+    const pool   = isGood ? GOOD_ITEMS : BAD_ITEMS;
+    const data   = pool[Math.floor(Math.random() * pool.length)];
+
+    arenaW = arena.clientWidth  || 760;
+    arenaH = arena.clientHeight || 460;
+    const left = ITEM_SIZE / 2 + Math.random() * (arenaW - ITEM_SIZE);
+
+    const el = document.createElement('div');
+    const hue = isGood ? '110' : '0';
+    el.style.cssText = `
+      position: absolute;
+      left: ${left - ITEM_SIZE / 2}px;
+      top: -${ITEM_SIZE + 4}px;
+      width: ${ITEM_SIZE}px;
+      height: ${ITEM_SIZE}px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 32%,
+        hsla(${hue},70%,88%,0.97) 0%,
+        hsla(${hue},58%,58%,0.88) 52%,
+        hsla(${hue},52%,36%,0.78) 100%);
+      box-shadow:
+        inset -5px -5px 12px rgba(0,0,0,0.14),
+        inset  4px  4px  9px rgba(255,255,255,0.44),
+        0 5px 18px hsla(${hue},58%,38%,0.32);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4px;
+      pointer-events: none;
+      will-change: transform;
+      z-index: 4;
+    `;
+    el.innerHTML = `
+      <span style="font-size:${ITEM_SIZE * 0.38}px; line-height:1; pointer-events:none;">${data.emoji}</span>
+      <span style="font-size:${Math.max(8, ITEM_SIZE * 0.125)}px; font-weight:800;
+        color:${isGood ? '#1a4d1a' : '#8b0000'}; line-height:1.1; margin-top:2px;
+        pointer-events:none;">${data.name}</span>
+    `;
+    arena.appendChild(el);
+
+    items.push({
+      el,
+      isGood,
+      tip: data.tip,
+      x: left,
+      y: -(ITEM_SIZE + 4),
+      speed: dropSpeed + Math.random() * 0.6,
+      caught: false,
+    });
+  }
+
+  /* ── Kollision Korb / Item ── */
+  function checkCatch(item) {
+    arenaH = arena ? (arena.clientHeight || 460) : 460;
+    const catchZoneTop = arenaH - BASKET_H - 12;
+    // item.y ist die top-Kante; Mitte = item.y + ITEM_SIZE/2
+    const itemCy = item.y + ITEM_SIZE / 2;
+    const basketLeft  = basketX - BASKET_W / 2;
+    const basketRight = basketX + BASKET_W / 2;
+
+    if (itemCy >= catchZoneTop && itemCy <= arenaH - 4) {
+      if (item.x >= basketLeft - 10 && item.x <= basketRight + 10) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /* ── Feedback-Text ── */
+  function showFeedback(x, y, text, color, bg) {
+    if (!arena) return;
+    const fb = document.createElement('div');
+    fb.textContent = text;
+    fb.style.cssText = `
+      position: absolute;
+      left: ${x}px; top: ${y}px;
+      transform: translate(-50%, -50%);
+      background: ${bg}; color: ${color};
+      font-size: 0.82rem; font-weight: 900;
+      padding: 5px 13px; border-radius: 999px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.14);
+      pointer-events: none; z-index: 40;
+      white-space: nowrap; opacity: 1;
+      transition: top 0.55s ease, opacity 0.55s ease;
+    `;
+    arena.appendChild(fb);
+    requestAnimationFrame(() => {
+      fb.style.top     = (y - 38) + 'px';
+      fb.style.opacity = '0';
+    });
+    setTimeout(() => fb.remove(), 620);
+  }
+
+  /* ── Item verschwinden lassen ── */
+  function removeItem(item, caught) {
+    item.caught = true;
+    item.el.style.transition = 'transform 0.15s, opacity 0.2s';
+    item.el.style.transform  = caught
+      ? (item.isGood ? 'scale(1.45)' : 'scale(0.55)')
+      : 'scale(0.4)';
+    item.el.style.opacity = '0';
+    setTimeout(() => { try { item.el.remove(); } catch(e){} }, 220);
+  }
+
+  /* ── Leben verlieren ── */
+  function loseLife(tip) {
+    lives = Math.max(0, lives - 1);
+    livesEl.textContent = lives > 0 ? '🦔'.repeat(lives) : '💀';
+    // Arena kurz rot blitzen
+    if (arena) {
+      arena.style.outline = '4px solid #e53935';
+      setTimeout(() => { if (arena) arena.style.outline = ''; }, 300);
+    }
+    if (lives === 0) endGame();
+  }
+
+  /* ── Level-Up ── */
+  function checkLevelUp() {
+    const newLevel = 1 + Math.floor(gameScore / 10);
+    if (newLevel > level) {
+      level = newLevel;
+      levelEl.textContent = level;
+      dropSpeed     = 1.8 + (level - 1) * 0.25;
+      spawnInterval = Math.max(700, 1600 - (level - 1) * 120);
+      restartSpawner();
+    }
+  }
+
+  /* ── Animation-Loop ── */
+  function tick() {
+    if (!running) return;
+    arenaH = arena ? (arena.clientHeight || 460) : 460;
+
+    items = items.filter(item => {
+      if (item.caught) return false;
+
+      item.y += item.speed;
+      item.el.style.top = item.y + 'px';
+
+      /* Kollisionsprüfung */
+      if (checkCatch(item)) {
+        removeItem(item, true);
+        if (item.isGood) {
+          gameScore++;
+          scoreEl.textContent = gameScore;
+          showFeedback(item.x, item.y + ITEM_SIZE / 2, '+1  ' + item.tip, '#1b5e20', '#e8f5e9');
+          checkLevelUp();
+        } else {
+          loseLife(item.tip);
+          showFeedback(item.x, item.y + ITEM_SIZE / 2, '💔  ' + item.tip, '#b71c1c', '#ffebee');
+        }
+        return false;
+      }
+
+      /* Item fällt komplett aus dem Bild heraus */
+      if (item.y > arenaH + 10) {
+        /* Gutes Item verpasst → kein Punktabzug, kein Lebensverlust (nur schade!) */
+        removeItem(item, false);
+        return false;
+      }
+      return true;
+    });
+
+    animId = requestAnimationFrame(tick);
+  }
+
+  /* ── Spawner ── */
+  function startSpawner() {
+    clearTimeout(spawnTimer);
+    const loop = () => {
+      if (!running) return;
+      spawnItem();
+      spawnTimer = setTimeout(loop, spawnInterval + Math.random() * 500);
+    };
+    spawnTimer = setTimeout(loop, 300);
+  }
+  function restartSpawner() {
+    clearTimeout(spawnTimer);
+    startSpawner();
+  }
+
+  /* ── Spiel starten ── */
+  function startGame() {
+    if (!arena) initRefs();
+    gameScore = 0; lives = 3; level = 1;
+    dropSpeed = 1.8; spawnInterval = 1600;
+    running = true;
+
+    scoreEl.textContent = '0';
+    livesEl.textContent = '🦔🦔🦔';
+    levelEl.textContent = '1';
+
+    items.forEach(it => { try { it.el.remove(); } catch(e){} });
+    items = [];
+
+    arenaW = arena.clientWidth  || 760;
+    arenaH = arena.clientHeight || 460;
+    basketX = arenaW / 2;
+    if (basket) basket.style.left = (basketX - BASKET_W / 2) + 'px';
+
+    idleEl.style.display     = 'none';
+    gameoverEl.style.display = 'none';
+    if (arena) arena.style.outline = '';
+
+    cancelAnimationFrame(animId);
+    animId = requestAnimationFrame(tick);
+    startSpawner();
+  }
+
+  /* ── Spiel beenden ── */
+  function endGame() {
+    running = false;
+    cancelAnimationFrame(animId);
+    clearTimeout(spawnTimer);
+    items.forEach(it => { try { it.el.remove(); } catch(e){} });
+    items = [];
+    finalScoreEl.textContent = gameScore;
+    gameoverEl.style.display = 'flex';
+  }
+
+  /* ── Events: Maus + Touch ── */
+  function setupControls() {
+    if (!arena) return;
+    arena.addEventListener('mousemove', e => { if (running) moveBasket(e.clientX); });
+    arena.addEventListener('touchmove', e => {
+      e.preventDefault();
+      if (running && e.touches.length > 0) moveBasket(e.touches[0].clientX);
+    }, { passive: false });
+    arena.addEventListener('touchstart', e => {
+      if (running && e.touches.length > 0) moveBasket(e.touches[0].clientX);
+    }, { passive: true });
+  }
+
+  /* ── Init ── */
+  function init() {
+    initRefs();
+    setupControls();
+    const startBtn   = document.getElementById('bbl-start-btn');
+    const restartBtn = document.getElementById('bbl-restart-btn');
+    if (startBtn)   startBtn.addEventListener('click', startGame);
+    if (restartBtn) restartBtn.addEventListener('click', startGame);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+/* ════════════════════════════════════════════════════════════ */
+
+// === QUIZ ===
+const QUIZ = [
+  { q: "Wie viele Stacheln hat ein Igel?", a: ["Etwa 500", "Etwa 8.000", "Etwa 80.000"], correct: 1 },
+  { q: "Was darfst du einem Igel NIEMALS geben?", a: ["Wasser", "Milch", "Insekten"], correct: 1 },
+  { q: "Wann ist ein Igel normalerweise aktiv?", a: ["Vormittags", "Mittags", "Nachts &amp; Dämmerung"], correct: 2 },
+  { q: "Wie viele km legt ein Igel pro Nacht zurück?", a: ["100 Meter", "Bis zu 2 km", "Bis zu 20 km"], correct: 1 },
+  { q: "Wie groß muss ein Igel-Durchgang im Zaun sein?", a: ["5 × 5 cm", "10 × 10 cm", "30 × 30 cm"], correct: 1 },
+  { q: "Was frisst ein Igel am liebsten?", a: ["Obst &amp; Brot", "Käfer, Würmer, Insekten", "Käse &amp; Wurst"], correct: 1 },
+];
+let qIdx = 0, score = 0;
+function renderQuiz() {
+  const prog = (qIdx / QUIZ.length) * 100;
+  document.getElementById('progressBar').style.width = prog + '%';
+  if (qIdx >= QUIZ.length) {
+    document.getElementById('progressBar').style.width = '100%';
+    document.getElementById('quizContent').innerHTML = `
+      <div class="quiz-finish">
+        <span class="score">${score}/${QUIZ.length}</span>
+        <p style="font-family: 'Caveat', cursive; font-size: 1.6rem; margin: 14px 0;">
+          ${score === QUIZ.length ? '🏆 Igel-Profi! Wow!' : score >= 4 ? '👍 Sehr gut!' : '🤔 Übung macht den Meister!'}
+        </p>
+        <button class="btn btn-primary" onclick="qIdx=0; score=0; renderQuiz()" type="button">Nochmal spielen →</button>
+      </div>`;
+    return;
+  }
+  const item = QUIZ[qIdx];
+  document.getElementById('quizContent').innerHTML = `
+    <p style="text-align: center; color: var(--ink-soft); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.85rem;">Frage ${qIdx + 1} von ${QUIZ.length}</p>
+    <h3 class="quiz-q">${item.q}</h3>
+    <div class="quiz-answers">
+      ${item.a.map((a, i) => `<button onclick="answer(${i})" type="button">${a}</button>`).join('')}
+    </div>
+    <div class="quiz-feedback" id="qFeedback"></div>
+  `;
+}
+function answer(i) {
+  const item = QUIZ[qIdx];
+  const btns = document.querySelectorAll('.quiz-answers button');
+  btns.forEach(b => b.disabled = true);
+  if (i === item.correct) {
+    btns[i].classList.add('correct');
+    score++;
+    document.getElementById('qFeedback').innerHTML = '🎉 Richtig!';
+    document.getElementById('qFeedback').style.color = 'var(--leaf)';
+  } else {
+    btns[i].classList.add('wrong');
+    btns[item.correct].classList.add('correct');
+    document.getElementById('qFeedback').innerHTML = '🙈 Knapp daneben';
+    document.getElementById('qFeedback').style.color = 'var(--accent-red)';
+  }
+  setTimeout(() => { qIdx++; renderQuiz(); }, 1400);
+}
+renderQuiz();
+
+// === MEMORY ===
+const MEM_EMOJI = ['🦔', '🍂', '🪲', '🌿', '🍎', '🌰', '🍄', '🐛'];
+function initMemory() {
+  const cards = [...MEM_EMOJI, ...MEM_EMOJI].sort(() => Math.random() - 0.5);
+  const grid = document.getElementById('memoryGrid');
+  grid.innerHTML = cards.map((c, i) => `<div class="memory-card" data-emoji="${c}" data-i="${i}" onclick="flipCard(this)"></div>`).join('');
+}
+let flipped = [];
+let lock = false;
+function flipCard(el) {
+  if (lock || el.classList.contains('matched') || el.classList.contains('flipped')) return;
+  el.classList.add('flipped');
+  el.textContent = el.dataset.emoji;
+  flipped.push(el);
+  if (flipped.length === 2) {
+    lock = true;
+    if (flipped[0].dataset.emoji === flipped[1].dataset.emoji) {
+      setTimeout(() => {
+        flipped.forEach(c => c.classList.add('matched'));
+        flipped = [];
+        lock = false;
+        const matchedCount = document.querySelectorAll('.memory-card.matched').length;
+        if (matchedCount === MEM_EMOJI.length * 2) {
+          setTimeout(() => alert('🏆 Geschafft! Alle Paare gefunden!'), 200);
+        }
+      }, 400);
+    } else {
+      setTimeout(() => {
+        flipped.forEach(c => { c.classList.remove('flipped'); c.textContent = ''; });
+        flipped = [];
+        lock = false;
+      }, 900);
+    }
+  }
+}
+initMemory();
+</script>
+</body>
+</html>
